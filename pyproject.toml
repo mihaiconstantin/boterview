@@ -12,6 +12,10 @@ authors = [
 description = "Easily deploy chatbot-based interviews with customizable protocols and randomized condition assignment for social science research."
 readme = "README.md"
 requires-python = ">=3.8"
+dependencies = [
+  "openai",
+  "chainlit"
+]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent"
