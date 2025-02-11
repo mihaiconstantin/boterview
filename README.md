@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://boterview.mihaiconstantin.com">
-        <img width="180px" src="assets/images/boterview-logo.png" alt="parabar logo"/>
+        <img width="180px" src="assets/images/boterview-logo.png" alt="boterview logo"/>
     </a>
 </p>
 
