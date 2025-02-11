@@ -173,3 +173,6 @@ cython_debug/
 # Other patterns.
 **/temp*
 .temp
+**/sandbox*
+*.drawio.bkp*
+**.DS_Store
