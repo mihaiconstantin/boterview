@@ -56,15 +56,15 @@ do so using the class API (i.e., see the [design diagram](#todo)), or more
 simply via a `TOML` configuration file.
 
 The example below shows how to configure a study using a `TOML` configuration
-file. Suppose you are interesting in a study conducting interviews for
-participants randomly assigned to one of two conditions, where each condition
-has a different interview guide. Say you have `study.toml` with the following
-content:
+file. Suppose you are interested in setting up a study conducting interviews
+with participants randomly assigned to one of two conditions, where each
+condition uses a different interview guide. You can achieve this in a
+`study.toml` file as follows:
 
 ```toml
 # The `bot` section contains key pertaining to the LLM used.
 [bot]
-api_key = "OPENAI_API_KEY"
+api_key = "OpenAI API key or name of environment variable"
 model = "gpt-4o"
 
 # The `study` section is used to, well, configure the study.
