@@ -4,7 +4,7 @@ import random
 from .counter import Counter
 from .condition import Condition
 from .participant import Participant
-from .prompt import Prompt
+from boterview.backend.prompt import Prompt
 
 
 # `Study` class for conducting interviews.

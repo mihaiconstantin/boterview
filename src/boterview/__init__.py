@@ -1,32 +1,32 @@
 # Imports for easier client usage.
 
 # Helpers.
-from .backend.helpers import parse_questions
-from .backend.helpers import read_contents
+from boterview.backend.helpers import parse_questions
+from boterview.backend.helpers import read_contents
 
 # Interfaces.
-from .backend.printable import Printable
+from boterview.backend.printable import Printable
 
 # Classes.
 
 # Interview classes.
-from .backend.protocol import Protocol
-from .backend.question import Question
-from .backend.guide import Guide
-from .backend.introduction import Introduction
-from .backend.closing import Closing
-from .backend.interview import Interview
+from boterview.backend.protocol import Protocol
+from boterview.backend.question import Question
+from boterview.backend.guide import Guide
+from boterview.backend.introduction import Introduction
+from boterview.backend.closing import Closing
+from boterview.backend.interview import Interview
 
 # Model classes.
-from .backend.prompt import Prompt
+from boterview.backend.prompt import Prompt
 
 # Study classes.
-from .backend.study import Study
-from .backend.condition import Condition
-from .backend.conversation import Conversation
-from .backend.participant import Participant
-from .backend.counter import Counter
+from boterview.backend.study import Study
+from boterview.backend.condition import Condition
+from boterview.backend.conversation import Conversation
+from boterview.backend.participant import Participant
+from boterview.backend.counter import Counter
 
 # Application classes.
-from .backend.boterview import Boterview
-from .backend.configuration import Configuration
+from boterview.backend.boterview import Boterview
+from boterview.backend.configuration import Configuration

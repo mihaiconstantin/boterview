@@ -1,8 +1,8 @@
 # Imports.
 from typing import List
-from .printable import Printable
-from .question import Question
-from .helpers import parse_questions
+from boterview.backend.printable import Printable
+from boterview.backend.question import Question
+from boterview.backend.helpers import parse_questions
 
 
 # `Protocol` class.

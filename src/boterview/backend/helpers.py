@@ -1,6 +1,6 @@
 # Imports.
 from typing import List
-from .question import Question
+from boterview.backend.question import Question
 
 
 # Helper to read the questions from a file and return them as a list.

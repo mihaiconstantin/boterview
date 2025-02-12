@@ -1,13 +1,13 @@
 # Imports.
-from .study import Study
-from .protocol import Protocol
-from .introduction import Introduction
-from .closing import Closing
-from .guide import Guide
-from .interview import Interview
-from .condition import Condition
-from .prompt import Prompt
-from .configuration import Configuration
+from boterview.backend.study import Study
+from boterview.backend.protocol import Protocol
+from boterview.backend.introduction import Introduction
+from boterview.backend.closing import Closing
+from boterview.backend.guide import Guide
+from boterview.backend.interview import Interview
+from boterview.backend.condition import Condition
+from boterview.backend.prompt import Prompt
+from boterview.backend.configuration import Configuration
 
 
 # The `Boterview` class for conducting up AI-based interview studies.
