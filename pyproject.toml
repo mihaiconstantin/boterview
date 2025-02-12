@@ -13,6 +13,7 @@ description = "Easily deploy chatbot-based interviews with customizable protocol
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+  "click",
   "openai",
   "chainlit"
 ]
@@ -22,6 +23,9 @@ classifiers = [
 ]
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
+
+[project.scripts]
+boterview = "boterview.cli.cli:cli"
 
 [project.urls]
 Homepage = "https://github.com/mihaiconstantin/boterview"
