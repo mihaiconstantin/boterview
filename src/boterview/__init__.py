@@ -29,3 +29,4 @@ from .backend.counter import Counter
 
 # Application classes.
 from .backend.boterview import Boterview
+from .backend.configuration import Configuration
