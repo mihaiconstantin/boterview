@@ -80,7 +80,7 @@ introduction = "path/to/introduction.md"
 closing = "path/to/closing.md"
 guide = "path/to/guide-condition-1.md"
 
-# Set the first condition (e.g., with a specific interview guide).
+# Set the second condition (e.g., with a different interview guide).
 [[study.conditions]]
 name = "Condition 2"
 prompt = "path/to/prompt.md"
