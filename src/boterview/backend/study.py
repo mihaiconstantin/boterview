@@ -15,9 +15,6 @@ class Study:
     # Generic counter.
     counter: Counter
 
-    # Model prompt.
-    prompt: Prompt
-
     # Dictionary of conditions.
     conditions: Dict[str, Condition]
 
@@ -36,11 +33,6 @@ class Study:
     def set_name(self: "Study", name: str) -> None:
         # Set the study name.
         self.name = name
-
-    # Set the model prompt.
-    def set_prompt(self: "Study", prompt: Prompt) -> None:
-        # Set the model prompt.
-        self.prompt = prompt
 
     # Append a condition.
     def append_condition(self: "Study", condition: Condition) -> None:
