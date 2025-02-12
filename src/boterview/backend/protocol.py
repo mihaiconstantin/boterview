@@ -18,7 +18,7 @@ class Protocol(Printable):
     # Prepare text version of the protocol.
     def to_text(self: "Protocol") -> str:
         # Initialize the text.
-        text: str = "## Questions\n\n"
+        text: str = "## Interview Questions\n\n"
 
         # For each question.
         for index, question in enumerate(self.questions):
