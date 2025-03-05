@@ -171,8 +171,9 @@ cython_debug/
 .pypirc
 
 # Other patterns.
-**/temp*
+**/temp-*
 .temp
 **/sandbox*
 *.drawio.bkp*
 **.DS_Store
+*.db
