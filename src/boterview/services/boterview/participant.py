@@ -7,6 +7,8 @@ class Participant:
     # The ID.
     code: str
 
+    # The participant consent status.
+    consent: bool = False
 
     # The condition name.
     condition_name: str | None
