@@ -52,3 +52,17 @@ def get_configuration() -> Configuration:
 
     # Return the configuration.
     return _configuration
+
+
+# Get the `UI` instance.
+def get_ui() -> UI:
+    # Ensure the UI is initialized.
+    if _ui is None:
+        # Initialize the application.
+        initialize_application()
+
+    # Assert the UI is not `None`.
+    assert _ui is not None, "`UI` instance not initialized."
+
+    # Return the UI.
+    return _ui
