@@ -2,6 +2,7 @@
 from typing import Any, Dict
 import os
 import tomllib
+from boterview.services.configuration.template import Template
 
 # Helpers.
 from boterview.helpers import utils
@@ -9,6 +10,9 @@ from boterview.helpers import utils
 
 # `Configuration` class.
 class Configuration:
+    # The configuration template with sensible defaults.
+    template: Template
+
     # The configuration.
     data: Dict[str, Any]
 
@@ -162,6 +166,17 @@ class Configuration:
 
         # Update the secret key entry in the configuration.
         self.data["app"]["secret_key"] = app_secret
+
+    # Set the template.
+    def _set_template(self: "Configuration") -> None:
+        # Initialize the configuration template.
+        self.template = Template()
+
+        # Set the template keys that refer to files.
+        self.template.files = [
+            "content",
+            "codes"
+        ] + [key for key in self.configuration_format["study"]["conditions"] if key != "name"]
 
     # Initialize the configuration.
     def __init__(self: "Configuration", config_file: str) -> None:
