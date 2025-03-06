@@ -38,3 +38,17 @@ def initialize_application() -> None:
     if _configuration is None or _ui is None or _boterview is None:
         # Create the application instances.
         _configuration, _ui, _boterview = create_application()
+
+
+# Get the `Configuration` instance.
+def get_configuration() -> Configuration:
+    # Ensure the configuration is initialized.
+    if _configuration is None:
+        # Initialize the application.
+        initialize_application()
+
+    # Assert the configuration is not `None`.
+    assert _configuration is not None, "`Configuration` instance not initialized."
+
+    # Return the configuration.
+    return _configuration
