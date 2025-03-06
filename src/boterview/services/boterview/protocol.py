@@ -100,6 +100,17 @@ class Protocol(Printable):
         # Return the list of questions.
         return questions
 
+    # Prepare the text version of the questions list.
+    def _questions_to_text(self: "Protocol") -> str:
+        # Questions as text.
+        questions: List[str] = [question.to_text(number = number) for number, question in enumerate(self.questions, 1)]
+
+        # # Add the questions to the output.
+        output: str = "\n\n".join(questions)
+
+        # Return the text.
+        return output
+
     # Initialize the protocol.
     def __init__(self: "Protocol", file: str):
         # Locally import the context.
@@ -118,18 +129,23 @@ class Protocol(Printable):
 
     # Prepare text version of the protocol.
     def to_text(self: "Protocol") -> str:
-        # Initialize the text.
-        text: str = "## Interview Questions\n\n"
+        # If there is no conte to show.
+        if not self.raw and not self.questions:
+            # Return an empty string.
+            return ""
 
-        # For each question.
-        for index, question in enumerate(self.questions):
-            # Add the question to the text.
-            text += question.to_text()
+        # Otherwise, prepare the output text.
+        output: str = "## Interview Questions\n\n"
 
-            # If it's not the last question.
-            if index < len(self.questions) - 1:
-                # Add a new line.
-                text += "\n\n"
+        # If there are parsed questions.
+        if self.questions:
+            # Prepare the text version of the questions list.
+            output += self._questions_to_text()
+
+        # Otherwise, use the raw protocol.
+        else:
+            # Add the raw protocol.
+            output += self.raw
 
         # Return the text.
-        return text
+        return output
