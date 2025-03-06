@@ -1,6 +1,6 @@
 # Imports.
-from datetime import datetime
 from typing import List, Dict
+from datetime import datetime, timezone
 from boterview.services.boterview.printable import Printable
 
 
@@ -31,7 +31,7 @@ class Conversation(Printable):
         # Append the message to the history.
         self.history.append({
             "type": type,
-            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
             "message": message
         })
 
