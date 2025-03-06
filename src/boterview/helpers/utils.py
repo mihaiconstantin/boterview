@@ -28,7 +28,7 @@ def read_contents(file: str) -> str:
 # Write contents to a file.
 def write_contents(file: str | pathlib.Path, contents: str) -> None:
     """
-    Write the contents to a file and return the status.
+    Write the contents to a file.
     """
 
     # Attempt to write the contents to the file.
