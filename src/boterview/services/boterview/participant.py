@@ -1,4 +1,5 @@
 # Imports.
+from datetime import datetime, timezone
 from boterview.services.boterview.conversation import Conversation
 
 
@@ -38,8 +39,11 @@ class Participant:
         # Set the ID.
         self.code = code
 
-        # Initialize the condition name.
-        self.condition = None
+        # Initialize the start time.
+        self.start_time = datetime.now(timezone.utc)
+
+        # Initialize the conversation.
+        self._set_conversation()
 
     # Set the condition name.
     def set_condition_name(self: "Participant", condition_name: str) -> None:
