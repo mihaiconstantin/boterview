@@ -67,3 +67,13 @@ class Study:
 
         # Increment the participants counter.
         self.counter.increment(what = "participants")
+
+    # Get a participation object by code.
+    def get_participant(self: "Study", code: str) -> Participant | None:
+        # Find the participant in the conditions.
+        participant: Participant | None = next(
+            (p for c in self.conditions.values() for p in c.participants if p.code == code), None
+        )
+
+        # Return the participant.
+        return participant
