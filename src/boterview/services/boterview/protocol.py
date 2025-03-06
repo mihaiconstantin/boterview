@@ -33,6 +33,17 @@ class Protocol(Printable):
         # Otherwise, return an empty string.
         return ""
 
+    # Remove the question annotation.
+    def _remove_question_annotation(self: "Protocol", question_text: str) -> str:
+        # Define the question annotation pattern.
+        pattern: re.Pattern = re.compile(r"^Question\s?([a-zA-Z]|[0-9]+[a-zA-Z]?)*\.")
+
+        # Remove the question annotation.
+        result: str = pattern.sub("", question_text).strip()
+
+        # Return the note.
+        return result
+
     # Initialize the protocol.
     def __init__(self: "Protocol", file: str):
         # Parse the questions.
