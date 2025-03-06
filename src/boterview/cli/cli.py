@@ -5,6 +5,7 @@ import sys
 # Import the commands.
 from boterview.cli.commands.preview import preview
 from boterview.cli.commands.run import run
+from boterview.cli.commands.generate import generate
 
 # Disable traceback.
 sys.tracebacklimit = 0
@@ -21,6 +22,9 @@ cli.add_command(preview)
 
 # Add the `run` command to the group.
 cli.add_command(run)
+
+# Add the `generate` command to the group.
+cli.add_command(generate)
 
 if __name__ == "__main__":
     cli()
