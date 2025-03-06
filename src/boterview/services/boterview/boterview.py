@@ -1,4 +1,5 @@
 # Imports.
+from boterview.services.boterview.code import Code
 from boterview.services.boterview.participant import Participant
 from boterview.services.boterview.study import Study
 from boterview.services.boterview.protocol import Protocol
@@ -63,6 +64,23 @@ class Boterview:
 
             # Append the condition to the study.
             self.study.append_condition(condition)
+
+    # Validate a participation code.
+    def validate_code(self: "Boterview", code: str) -> bool:
+        # Find the code.
+        code_object: Code | None = next(
+            (c for c in self.study.codes if c.value == code), None
+        )
+
+        # Fail if the code is not found or is already used.
+        if code_object is None or code_object.used:
+            return False
+
+        # Otherwise, mark the code as used.
+        code_object.used = True
+
+        # Return success.
+        return True
 
     # Preview a condition in text format.
     def preview_condition(self: "Boterview", name: str) -> None:
