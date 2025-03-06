@@ -1,7 +1,7 @@
 # Imports.
 from datetime import datetime
 from typing import List, Dict
-from boterview.backend.printable import Printable
+from boterview.services.boterview.printable import Printable
 
 
 # `Conversation` class for the chat between the bot and the participant.

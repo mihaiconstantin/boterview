@@ -1,8 +1,8 @@
 # Imports.
 from typing import List
-from boterview.backend.interview import Interview
-from boterview.backend.participant import Participant
-from boterview.backend.prompt import Prompt
+from boterview.services.boterview.interview import Interview
+from boterview.services.boterview.participant import Participant
+from boterview.services.boterview.prompt import Prompt
 
 
 # `Condition` class for study conditions.

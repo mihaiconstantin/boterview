@@ -1,5 +1,5 @@
 # Imports.
-from boterview.backend.printable import Printable
+from boterview.services.boterview.printable import Printable
 
 
 # `Question` class.

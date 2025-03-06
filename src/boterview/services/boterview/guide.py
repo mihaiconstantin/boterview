@@ -1,6 +1,6 @@
 # Imports.
-from boterview.backend.printable import Printable
-from boterview.backend.helpers import read_contents
+from boterview.services.boterview.printable import Printable
+import boterview.helpers.utils as utils
 
 
 # `Guide` class for interview background information.

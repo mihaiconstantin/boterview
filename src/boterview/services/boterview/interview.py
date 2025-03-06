@@ -1,9 +1,9 @@
 # Imports.
-from boterview.backend.printable import Printable
-from boterview.backend.protocol import Protocol
-from boterview.backend.guide import Guide
-from boterview.backend.introduction import Introduction
-from boterview.backend.closing import Closing
+from boterview.services.boterview.printable import Printable
+from boterview.services.boterview.protocol import Protocol
+from boterview.services.boterview.guide import Guide
+from boterview.services.boterview.introduction import Introduction
+from boterview.services.boterview.closing import Closing
 
 
 # `Interview` class.

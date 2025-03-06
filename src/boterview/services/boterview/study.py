@@ -2,9 +2,9 @@
 from typing import Dict, List
 import random
 from .counter import Counter
-from .condition import Condition
-from .participant import Participant
-from boterview.backend.prompt import Prompt
+from boterview.services.boterview.condition import Condition
+from boterview.services.boterview.participant import Participant
+from boterview.services.boterview.counter import Counter
 
 
 # `Study` class for conducting interviews.

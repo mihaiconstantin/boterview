@@ -1,6 +1,8 @@
 # Imports.
-from boterview.backend.printable import Printable
-from boterview.backend.helpers import read_contents
+from boterview.services.boterview.printable import Printable
+
+# Helpers.
+import boterview.helpers.utils as utils
 
 
 # `Closing` class for interview closing.

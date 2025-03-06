@@ -1,5 +1,5 @@
 # Imports.
-from boterview.backend.conversation import Conversation
+from boterview.services.boterview.conversation import Conversation
 
 
 # `Participant` class for subjects taking part in the study.
