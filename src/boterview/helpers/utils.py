@@ -1,5 +1,5 @@
 # Imports.
-from typing import Any, List, Type, LiteralString, get_origin, get_args
+from typing import Any, List, Type, Union, LiteralString, get_origin, get_args
 import pathlib
 import textwrap
 import os
@@ -163,6 +163,26 @@ def is_optional(expected_type: Type[Any]) -> bool:
     if get_origin(expected_type) is not None and type(None) in get_args(expected_type):
         # Return `True`.
         return True
+
+    # Otherwise, return `False`.
+    return False
+
+
+# Check if a given type annotation is a dictionary.
+def is_dictionary(expected_type: Type[Any]) -> bool:
+    # If the type is a `Union`.
+    if get_origin(expected_type) is Union:
+        # Extract the non-`None` type.
+        expected_type = next(
+            # Get the non-`None` type.
+            (arg for arg in get_args(expected_type) if arg is not type(None)),
+
+            # If no non-`None` type is found, use the original type.
+            expected_type
+        )
+
+        # Return `True` if the type is a dictionary.
+        return get_origin(expected_type) is dict
 
     # Otherwise, return `False`.
     return False
