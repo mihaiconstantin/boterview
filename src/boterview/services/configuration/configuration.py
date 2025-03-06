@@ -142,9 +142,9 @@ class Configuration:
                         # Assert that the `ui` key is present in the parsed configuration.
                         assert ui_key in self.data[section][key], f"Missing configuration key \"{ section }.{ key }.{ ui_key }\"."
 
-    # Parse the `API` key.
+    # Parse the bot `API` key.
     def _parse_api_key(self: "Configuration") -> None:
-        # Try to get the key in case the user provided an environment variable.
+        # Try to get the key in case the user provided it as an environment variable.
         api_key: str = os.environ.get(self.data["bot"]["api_key"], self.data["bot"]["api_key"])
 
         # Update the `API` key entry in the configuration.
