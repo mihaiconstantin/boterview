@@ -1,5 +1,6 @@
 # Imports.
 from typing import List
+import re
 from boterview.services.configuration.configuration import Configuration
 from boterview.services.boterview.printable import Printable
 from boterview.services.boterview.question import Question
@@ -12,6 +13,25 @@ import boterview.helpers.utils as utils
 class Protocol(Printable):
     # The questions array.
     questions: List[Question] = []
+
+    # Get the question identifier.
+    def _get_question_identifier(self: "Protocol", question_text: str) -> str:
+        # Define the question annotation pattern.
+        pattern: re.Pattern = re.compile(r"^(?P<annotation>Question)\s?(?P<identifier>[a-zA-Z]|[0-9]+[a-zA-Z]?)*(?P<period>\.)")
+
+        # Extract the match.
+        match: re.Match[str] | None = pattern.match(question_text)
+
+        # If there is a match.
+        if match:
+            # Extract the identifier.
+            identifier = match.group("identifier")
+
+            # Return the identifier.
+            return identifier
+
+        # Otherwise, return an empty string.
+        return ""
 
     # Initialize the protocol.
     def __init__(self: "Protocol", file: str):
