@@ -215,17 +215,34 @@ class Configuration:
         ] + [key for key in self.configuration_format["study"]["conditions"] if key != "name"]
 
     # Initialize the configuration.
-    def __init__(self: "Configuration", config_file: str) -> None:
+    def __init__(self: "Configuration") -> None:
+        # Set the template.
+        self._set_template()
+
+        # Initialize the configuration data.
+        self.data = {}
+
+    # Initialize the configuration.
+    def load_configuration(self: "Configuration", config_file: str) -> None:
+        # Load the `.env` file.
+        self._load_env_file()
+
         # Read the `TOML` config from a file.
         with open(config_file, "rb") as file:
             # Parse the file as a dictionary.
             self.data = tomllib.load(file)
 
         # Validate the required configuration keys.
-        self._validate_configuration_keys()
+        self._validate_configuration_sections()
 
         # Validate the required configuration format.
         self._validate_configuration_format()
 
-        # Parse the `API` key.
+        # Parse the bot `API` key.
         self._parse_api_key()
+
+        # Parse the secret key.
+        self._parse_secret_key()
+
+        # Set default values for optional keys.
+        self._set_default_values()
