@@ -17,7 +17,7 @@ class Participant:
     end_time: datetime
 
     # The condition name.
-    condition_name: str | None
+    condition_name: str
 
     # The conversation.
     conversation: Conversation
