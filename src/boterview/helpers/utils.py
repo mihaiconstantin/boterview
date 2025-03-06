@@ -1,3 +1,7 @@
+# Imports.
+import pathlib
+
+
 # Parse the contents of a file.
 def read_contents(file: str) -> str:
     """
@@ -33,3 +37,20 @@ def write_contents(file: str | pathlib.Path, contents: str) -> None:
     except Exception as e:
         # Throw.
         raise e
+
+
+# Create file path and write contents to a file.
+def create_and_write_contents(file: str | pathlib.Path, contents: str) -> None:
+    """
+    Create a file and its parent directories, and write the contents to it.
+    """
+
+    # Create the file path.
+    file = pathlib.Path(file)
+
+    # Create the parents if they don't
+    file.parent.mkdir(parents = True, exist_ok = True)
+
+    # Write the contents to the file.
+    write_contents(file, contents)
+
