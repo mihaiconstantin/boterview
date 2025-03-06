@@ -1,7 +1,7 @@
 # Imports.
 from typing import Dict, List
 import random
-from .counter import Counter
+from boterview.services.boterview.code import Code
 from boterview.services.boterview.condition import Condition
 from boterview.services.boterview.participant import Participant
 from boterview.services.boterview.counter import Counter
@@ -14,6 +14,9 @@ class Study:
 
     # Generic counter.
     counter: Counter
+
+    # Participation codes.
+    codes: List[Code]
 
     # Dictionary of conditions.
     conditions: Dict[str, Condition]
@@ -30,6 +33,11 @@ class Study:
     def set_name(self: "Study", name: str) -> None:
         # Set the study name.
         self.name = name
+
+    # Set the participation codes.
+    def set_codes(self: "Study", codes: List[Code]) -> None:
+        # Set the participation codes.
+        self.codes = codes
 
     # Append a condition.
     def append_condition(self: "Study", condition: Condition) -> None:
