@@ -58,15 +58,24 @@ class Boterview:
         # Create a `Study` object.
         self.study = Study()
 
-    # Prepare the study based on a `Configuration` object.
-    def initialize_study(self: "Boterview") -> None:
+    # Prepare the study based on the configuration.
+    def initialize_study(self: "Boterview", configuration: Configuration) -> None:
         # Set the study name.
-        self.study.set_name(self.configuration.data["study"]["name"])
+        self.study.set_name(configuration.data["study"]["name"])
+
+        # Parse the study codes.
+        codes: List[Code] = self._parse_codes(configuration.data["study"]["codes"])
+
+        # Set the study participation codes.
+        self.study.set_codes(codes)
 
         # For each condition in the configuration.
-        for condition in self.configuration.data["study"]["conditions"]:
-            # Create an interview `Protocol` object.
-            interview_protocol: Protocol = Protocol(condition["protocol"])
+        for condition in configuration.data["study"]["conditions"]:
+            # Create an interview object.
+            interview: Interview = Interview()
+
+            # Create an interview `Guide` object.
+            interview_guide: Guide = Guide(condition["guide"])
 
             # Create an interview `Introduction` object.
             interview_introduction: Introduction = Introduction(condition["introduction"])
@@ -74,17 +83,20 @@ class Boterview:
             # Create an interview `Closing` object.
             interview_closing: Closing = Closing(condition["closing"])
 
-            # Create an interview `Guide` object.
-            interview_guide: Guide = Guide(condition["guide"])
+            # Create an interview `Protocol` object.
+            interview_protocol: Protocol = Protocol(condition["protocol"])
 
-            # Create an interview object.
-            interview: Interview = Interview()
-
-            # Set the parts.
-            interview.set_protocol(interview_protocol)
-            interview.set_introduction(interview_introduction)
-            interview.set_closing(interview_closing)
+            # Set the guide.
             interview.set_guide(interview_guide)
+
+            # Set the introduction.
+            interview.set_introduction(interview_introduction)
+
+            # Set the closing.
+            interview.set_closing(interview_closing)
+
+            # Set the protocol.
+            interview.set_protocol(interview_protocol)
 
             # Create a `Prompt` object.
             model_prompt: Prompt = Prompt(condition["prompt"])
