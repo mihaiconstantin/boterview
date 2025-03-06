@@ -55,6 +55,48 @@ class Protocol(Printable):
         # Return the note.
         return result
 
+    # Parse the questions.
+    def _parse_questions(self: "Protocol", file: str, question_separator: str) -> List[Question]:
+        # Initialize the list of questions.
+        questions: List[Question] = []
+
+        # Split contents by empty lines.
+        blocks: List[str] = self.raw.split(question_separator)
+
+        # For each block containing the question and the note.
+        for index, block in enumerate(blocks):
+            # Remove leading and trailing whitespace.
+            block = block.strip()
+
+            # If the block is empty.
+            if not block:
+                # Skip it.
+                continue
+
+            # Split the block by empty line and extract the split as the question.
+            lines: List[str] = block.split("\n\n")
+
+            # Extract the question text.
+            question_text: str = " ".join(lines[0].strip().split("\n"))
+
+            # Extract the question note.
+            question_note: str = "\n\n".join(lines[1:]).strip()
+
+            # Remove the question annotation.
+            question_text = self._remove_question_annotation(question_text)
+
+            # Remove the note annotation.
+            question_note = self._remove_note_annotation(question_note)
+
+            # Initialize the question.
+            question: Question = Question(text = question_text, note = question_note)
+
+            # Append the question to the list.
+            questions.append(question)
+
+        # Return the list of questions.
+        return questions
+
     # Initialize the protocol.
     def __init__(self: "Protocol", file: str):
         # Parse the questions.
