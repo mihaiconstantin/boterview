@@ -25,6 +25,14 @@ class Participant:
     # System prompt.
     prompt: str
 
+    # Set the conversation.
+    def _set_conversation(self: "Participant") -> None:
+        # Set the conversation.
+        self.conversation = Conversation()
+
+        # Set the participant ID.
+        self.conversation.set_participant_code(self.code)
+
     # Initialize the participant.
     def __init__(self: "Participant", code: str) -> None:
         # Set the ID.
@@ -38,10 +46,3 @@ class Participant:
         # Set the name.
         self.condition_name = condition_name
 
-    # Set the conversation.
-    def _set_conversation(self: "Participant") -> None:
-        # Set the conversation.
-        self.conversation = Conversation()
-
-        # Set the participant ID.
-        self.conversation.set_participant_code(self.code)
