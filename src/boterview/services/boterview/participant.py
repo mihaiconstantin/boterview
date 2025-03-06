@@ -1,4 +1,5 @@
 # Imports.
+import re
 from datetime import datetime, timezone
 from boterview.services.boterview.conversation import Conversation
 
@@ -50,3 +51,10 @@ class Participant:
         # Set the name.
         self.condition_name = condition_name
 
+    # Set the system prompt used.
+    def set_prompt(self: "Participant", prompt: str) -> None:
+        # Compile the `regex` pattern.
+        pattern: re.Pattern = re.compile(r"\{\{\s*termination\s*\}\}")
+
+        # Replace the termination pattern and set the prompt.
+        self.prompt = pattern.sub("stop " + self.code, prompt)
