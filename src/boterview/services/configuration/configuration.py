@@ -1,4 +1,5 @@
 # Imports.
+from typing import Any, Dict
 import os
 import tomllib
 from typing import Any, Dict, List
@@ -9,24 +10,61 @@ class Configuration:
     # The configuration.
     data: Dict[str, Any]
 
-    # Define the required config keys.
-    configuration_keys: List[str] = ["bot", "study"]
+    # Define the config keys.
+    configuration_sections: Dict[str, Any] = {
+        "app": Any,
+        "bot": Any,
+        "ui": Any,
+        "chat": Any | None,
+        "study": Any
+    }
 
     # Expected configuration format.
     configuration_format: Dict[str, Any] = {
+        "app": {
+            "secret_key": str
+        },
         "bot": {
             "api_key": str,
-            "model": str,
+            "settings": Dict[str, Any] | None,
+        },
+        "ui": {
+            "welcome": {
+                "heading": str,
+                "content": str,
+                "html": bool | None
+            },
+            "consent": {
+                "heading": str,
+                "content": str,
+                "html": bool | None
+            },
+            "stop": {
+                "heading": str,
+                "content": str,
+                "html": bool | None,
+                "timeout": int | None
+            },
+            "footer": Dict[str, Any] | None
+        },
+        "chat": {
+            "stop_response_bot_triggered": str | None,
+            "stop_response_user_triggered": str | None,
+            "stop_button_label": str | None,
+            "initial_message": str | None
         },
         "study": {
-            "name": str,
+            "name": str | None,
+            "codes": str,
+            "protocol_process": bool | None,
+            "protocol_question_separator": str | None,
             "conditions": {
                 "name": str,
                 "prompt": str,
                 "protocol": str,
-                "introduction": str,
-                "closing": str,
-                "guide": str
+                "guide": str | None,
+                "introduction": str | None,
+                "closing": str | None
             }
         }
     }
