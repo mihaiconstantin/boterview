@@ -1,6 +1,7 @@
 # Imports.
 from typing import List, LiteralString
 import pathlib
+import textwrap
 import os
 import secrets
 import string
@@ -149,3 +150,8 @@ def markdown_code_block(text: str, language: str = "") -> str:
     # Return the markdown code block.
     return f"```{language}\n{text.strip()}\n```"
 
+
+# Sanitize a string by trimming and removing indentation.
+def sanitize(text: str) -> str:
+    # Return the trimmed and unindented string.
+    return textwrap.dedent(text).strip()
