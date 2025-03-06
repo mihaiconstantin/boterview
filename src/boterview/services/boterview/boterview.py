@@ -71,16 +71,10 @@ class Boterview:
 
         # If the condition is not found, raise an error.
         if condition is None:
-            raise ValueError(f"Condition '{name}' not found for study '{self.study.name}'.")
+            raise ValueError(f"Condition \"{name}\" not found for study \"{self.study.name}\".")
 
-        # Merge the text.
-        text: str = condition.prompt.text
-
-        # Add an empty line.
-        text += "\n\n"
-
-        # Add the protocol.
-        text += condition.interview.to_text()
+        # Get the condition as text.
+        text: str = condition.to_text()
 
         # Print the text.
         print(text)
