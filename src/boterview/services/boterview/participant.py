@@ -5,7 +5,8 @@ from boterview.services.boterview.conversation import Conversation
 # `Participant` class for subjects taking part in the study.
 class Participant:
     # The ID.
-    id: str
+    code: str
+
 
     # The condition name.
     condition_name: str | None
@@ -14,9 +15,9 @@ class Participant:
     conversation: Conversation
 
     # Initialize the participant.
-    def __init__(self: "Participant", id: str) -> None:
+    def __init__(self: "Participant", code: str) -> None:
         # Set the ID.
-        self.id = id
+        self.code = code
 
         # Initialize the condition name.
         self.condition = None
