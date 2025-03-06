@@ -22,6 +22,9 @@ class Participant:
     # The conversation.
     conversation: Conversation
 
+    # System prompt.
+    prompt: str
+
     # Initialize the participant.
     def __init__(self: "Participant", code: str) -> None:
         # Set the ID.
