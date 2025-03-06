@@ -66,3 +66,17 @@ def get_ui() -> UI:
 
     # Return the UI.
     return _ui
+
+
+# Get the `Boterview` instance.
+def get_boterview() -> Boterview:
+    # Ensure the `Boterview` is initialized.
+    if _boterview is None:
+        # Initialize the application.
+        initialize_application()
+
+    # Assert the `Boterview` is not `None`.
+    assert _boterview is not None, "`Boterview` instance not initialized."
+
+    # Return the `Boterview`.
+    return _boterview
