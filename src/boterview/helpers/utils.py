@@ -104,3 +104,42 @@ def get_environment_variable(variable: str) -> str:
     # Return the value of the environment variable.
     return value
 
+
+# Return a list the human-like enumeration string.
+def list_to_enumeration(list: List[str], conjunction: str) -> str:
+    # Wrap each element in quotes.
+    list = [f"\"{element}\"" for element in list]
+
+    # Output.
+    output: str
+
+    # If there are no elements in the list.
+    if len(list) == 0:
+        # Return an empty string.
+        output = ""
+
+        # Return
+        return output
+
+    # If there is only one element in the list.
+    if len(list) == 1:
+        # Return the element.
+        output = list[0]
+
+        # Return
+        return output
+
+    # If there are two elements in the list.
+    if len(list) == 2:
+        # Return the elements separated by the preposition.
+        output = f" {conjunction} ".join(list)
+
+        # Return
+        return output
+
+    # For more than two elements, enumerate and add the preposition.
+    output = ", ".join(list[:-1]) + f", {conjunction} " + list[-1]
+
+    # Return the output.
+    return output
+
