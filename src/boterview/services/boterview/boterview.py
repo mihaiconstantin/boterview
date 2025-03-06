@@ -65,6 +65,27 @@ class Boterview:
             # Append the condition to the study.
             self.study.append_condition(condition)
 
+    # Assign a participant to a study condition.
+    def assign_participant(self: "Boterview", code: str) -> None:
+        # Create a new participant.
+        participant: Participant = Participant(code)
+
+        # Assign the participant to a condition.
+        self.study.assign_participant(participant)
+
+    # Retrieve the participant based on the `chainlit` session user identifier.
+    def retrieve_participant(self: "Boterview", code: str) -> Participant:
+        # Get the participant.
+        participant: Participant | None = self.study.get_participant(code)
+
+        # If no participant is found, raise an error.
+        if not participant:
+            # Throw.
+            raise ValueError(f"Could not find an assigned participant with code \"{code}\".")
+
+        # Return the participant.
+        return participant
+
     # Validate a participation code.
     def validate_code(self: "Boterview", code: str) -> bool:
         # Find the code.
