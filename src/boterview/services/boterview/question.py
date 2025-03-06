@@ -12,7 +12,10 @@ class Question(Printable):
 
     # Initialize the question.
     def __init__(self: "Question", text: str, note: str | None) -> None:
+        # Set the question text.
         self.text = text
+
+        # Set the question note.
         self.note = note
 
     # Prepare text version of the question.
