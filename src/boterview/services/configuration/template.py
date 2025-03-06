@@ -1,5 +1,6 @@
 # Imports.
-from typing import Any, Dict
+from typing import Any, Dict, List
+import pathlib
 import copy
 
 # Import content.
@@ -14,7 +15,74 @@ class Template:
     # The template content.
     content: Dict[str, Any] = TEMPLATE
 
+    # List of configuration keys that refer to files.
+    files: List[str] = []
+
     # Recursively generate a `TOML` string from the configuration template.
+    def _parse_template_to_toml(self: "Template", config: Dict[str, Any], parent: str, directory: pathlib.Path) -> str:
+        # Define commonly used strings.
+        new_line: str = "\n"
+        empty_line: str = "\n\n"
+
+        # Initialize the text.
+        toml: str = ""
+
+        # For each key and item in the template.
+        for key, entry in config.items():
+            # Get the comment.
+            comment: str = entry.get("comment")
+
+            # Get the value.
+            value: Dict[str, Any] = entry.get("value")
+
+            # If the value is a dictionary.
+            if isinstance(value, dict):
+                # Define the name.
+                section_name: str = f"{parent}.{key}" if parent else key
+
+                # If we are dealing with conditions.
+                if key == "conditions":
+                    # Format the section name as an array.
+                    section_name = f"[{section_name}]"
+
+                # Write the comment with the right kind of spacing.
+                toml += (new_line if parent else empty_line) + f"# {comment}" + new_line
+
+                # Write the name.
+                toml += f"[{section_name}]" + new_line
+
+                # Recursively call the function.
+                toml += self._parse_template_to_toml(
+                    config = value,
+                    parent = section_name,
+                    directory = directory
+                )
+
+            # Otherwise, the value is a string.
+            else:
+                # Write the comment.
+                toml += f"# {comment}" + new_line
+
+                # If the key is in the list of files.
+                if key in self.files:
+                    # Write the file path.
+                    value = str(directory / value)
+
+                # If the value is a string.
+                if isinstance(value, str):
+                    # Wrap it with double quotes.
+                    value = f"\"{value}\""
+
+                # If the value is a boolean.
+                if isinstance(value, bool):
+                    # Convert it to a `TOML` boolean.
+                    value = "true" if value else "false"
+
+                # Write the value.
+                toml += f"{key} = {value}" + new_line
+
+        # Return the string.
+        return toml
 
     # Get a setting from the configuration template (e.g., `app.secret_key`).
     def get(self: "Template", setting: str, what: str = "value") -> Dict[str, Any] | ValueError:
@@ -79,3 +147,17 @@ class Template:
             # Raise an error.
             raise ValueError(f"Setting \"{setting}\" is not properly structured in the template.")
 
+    # Print the configuration template to text.
+    def to_toml(self: "Template", directory: pathlib.Path) -> str:
+        # Initialize the text.
+        toml: str = "# Configuration file for the `boterview` application."
+
+        # Parse the configuration template.
+        toml += self._parse_template_to_toml(
+            config = self.content,
+            parent = "",
+            directory = directory
+        )
+
+        # Return the `TOML` string.
+        return toml
