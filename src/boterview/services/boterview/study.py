@@ -20,9 +20,6 @@ class Study:
 
     # Initialize the study.
     def __init__(self: "Study") -> None:
-        # Set the study name.
-        self.name = None
-
         # Initialize the counter.
         self.counter = Counter()
 
