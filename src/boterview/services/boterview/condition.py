@@ -1,12 +1,13 @@
 # Imports.
 from typing import List
+from boterview.services.boterview.printable import Printable
 from boterview.services.boterview.interview import Interview
 from boterview.services.boterview.participant import Participant
 from boterview.services.boterview.prompt import Prompt
 
 
 # `Condition` class for study conditions.
-class Condition:
+class Condition(Printable):
     # Condition name.
     name: str
 
@@ -44,3 +45,16 @@ class Condition:
         # As well as the system prompt.
         participant.set_prompt(self.to_text())
 
+    # Render the condition as text.
+    def to_text(self: "Condition") -> str:
+        # Add the prompt.
+        text: str = self.prompt.to_text()
+
+        # Add an empty line.
+        text += "\n\n"
+
+        # Add the interview.
+        text += self.interview.to_text()
+
+        # Return the string.
+        return text
