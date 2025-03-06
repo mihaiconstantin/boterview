@@ -50,7 +50,7 @@ class Conversation(Printable):
         # For each message in the history.
         for message in self.history:
             # Add the message to the text.
-            text += f"{message['timestamp']} - {message['type'].capitalize()}: {message['message']}\n"
+            text += f"{message["timestamp"]} - {message["type"].capitalize()}: {message["message"]}\n"
 
         # Return the text.
         return text
