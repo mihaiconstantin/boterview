@@ -3,9 +3,15 @@ from typing import List, Dict
 from datetime import datetime, timezone
 from boterview.services.boterview.printable import Printable
 
+# Helpers.
+import boterview.helpers.utils as utils
+
 
 # `Conversation` class for the chat between the bot and the participant.
 class Conversation(Printable):
+    # Allowed message types.
+    _message_type: List[str] = ["bot", "participant"]
+
     # Participant code (i.e., aka ID).
     participant_code: str
 
@@ -25,8 +31,9 @@ class Conversation(Printable):
     # Append a message to the history.
     def append_message(self: "Conversation", type: str, message: str) -> None:
         # Validate the message type.
-        if type not in ["bot", "participant"]:
-            raise ValueError(f"Invalid conversation message type: '{type}'.")
+        if type not in self._message_type:
+            # Throw.
+            raise ValueError(f"Invalid conversation message type: \"{type}\". Must be one of {utils.list_to_enumeration(self._message_type, "or")}.")
 
         # Append the message to the history.
         self.history.append({
