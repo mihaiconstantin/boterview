@@ -10,10 +10,20 @@ class Closing(Printable):
     # The interview closing text.
     text: str = ""
 
+    # Parse the guide text.
+    def _parse_file(self: "Closing", file: str | None) -> None:
+        # If the file is not set.
+        if not file:
+            # Return
+            return
+
+        # Otherwise, read and set the text from the file.
+        self.text = utils.read_contents(file)
+
     # Initialize the closing.
-    def __init__(self: "Closing", file: str):
-        # Read and set the text from the file.
-        self.text = read_contents(file)
+    def __init__(self: "Closing", file: str | None):
+        # Parse the text.
+        self._parse_file(file)
 
     # Prepare text.
     def to_text(self: "Closing") -> str:
