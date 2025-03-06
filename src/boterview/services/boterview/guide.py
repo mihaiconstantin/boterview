@@ -25,7 +25,12 @@ class Guide(Printable):
 
     # Prepare text.
     def to_text(self: "Guide") -> str:
-        # Prepare the output text.
+        # If the text is empty, return an empty string.
+        if not self.text:
+            # Return
+            return ""
+
+        # Otherwise, prepare the output text.
         output: str = "## Interview Guide\n\n"
 
         # Add the text.
