@@ -39,9 +39,9 @@ class Participant:
         self.condition_name = condition_name
 
     # Set the conversation.
-    def set_conversation(self: "Participant", conversation: Conversation) -> None:
+    def _set_conversation(self: "Participant") -> None:
         # Set the conversation.
-        self.conversation = conversation
+        self.conversation = Conversation()
 
         # Set the participant ID.
-        self.conversation.set_participant_id(self.id)
+        self.conversation.set_participant_code(self.code)
