@@ -2,7 +2,9 @@
 from typing import Any, Dict
 import os
 import tomllib
-from typing import Any, Dict, List
+
+# Helpers.
+from boterview.helpers import utils
 
 
 # `Configuration` class.
@@ -69,12 +71,19 @@ class Configuration:
         }
     }
 
-    # Check that required configuration keys are present.
-    def _validate_configuration_keys(self: "Configuration") -> None:
+
+    # Check that required configuration sections are present.
+    def _validate_configuration_sections(self: "Configuration") -> None:
         # For each key.
-        for key in self.configuration_keys:
+        for section, section_type in self.configuration_sections.items():
+
+            # If the key is optional.
+            if utils.is_optional(section_type):
+                # Skip the check.
+                continue
+
             # Check if it is present.
-            assert key in self.data, f"Missing configuration section '{ key }'."
+            assert section in self.data, f"Missing configuration section \"{ section }\"."
 
     # Check the required configuration format.
     def _validate_configuration_format(self: "Configuration") -> None:
