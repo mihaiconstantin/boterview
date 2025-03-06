@@ -150,6 +150,19 @@ class Configuration:
         # Update the `API` key entry in the configuration.
         self.data["bot"]["api_key"] = api_key
 
+    # Parse the application secret key.
+    def _parse_secret_key(self: "Configuration") -> None:
+        # Try to get the key in case the user provided it as an environment variable.
+        app_secret: str = os.environ.get(self.data["app"]["secret_key"], self.data["app"]["secret_key"])
+
+        # If the secret is not long enough.
+        if len(app_secret) < 20:
+            # Raise an error.
+            raise ValueError("The secret key is too short. Run `boterview generate secret` to generate a proper random secret key.")
+
+        # Update the secret key entry in the configuration.
+        self.data["app"]["secret_key"] = app_secret
+
     # Initialize the configuration.
     def __init__(self: "Configuration", config_file: str) -> None:
         # Read the `TOML` config from a file.
