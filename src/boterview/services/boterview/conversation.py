@@ -6,8 +6,8 @@ from boterview.services.boterview.printable import Printable
 
 # `Conversation` class for the chat between the bot and the participant.
 class Conversation(Printable):
-    # Participant ID.
-    participant_id: str
+    # Participant code (i.e., aka ID).
+    participant_code: str
 
     # History.
     history: List[Dict[str, str]]
@@ -17,10 +17,10 @@ class Conversation(Printable):
         # Initialize an empty history.
         self.history = []
 
-    # Set the participant ID.
-    def set_participant_id(self: "Conversation", participant_id: str) -> None:
-        # Set the participant ID.
-        self.participant_id = participant_id
+    # Set the participant code.
+    def set_participant_code(self: "Conversation", participant_code: str) -> None:
+        # Set the participant code.
+        self.participant_code = participant_code
 
     # Append a message to the history.
     def append_message(self: "Conversation", type: str, message: str) -> None:
