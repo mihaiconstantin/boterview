@@ -15,9 +15,6 @@ from boterview.services.configuration.configuration import Configuration
 
 # The `Boterview` class for conducting up AI-based interview studies.
 class Boterview:
-    # The `Configuration` object.
-    configuration: Configuration
-
     # The `Study` object.
     study: Study
 
@@ -57,10 +54,7 @@ class Boterview:
         return code_objects
 
     # Initialize the `Boterview` object.
-    def __init__(self: "Boterview", configuration: str) -> None:
-        # Parse the configuration file.
-        self.configuration = Configuration(configuration)
-
+    def __init__(self: "Boterview") -> None:
         # Create a `Study` object.
         self.study = Study()
 
