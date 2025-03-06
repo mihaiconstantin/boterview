@@ -167,6 +167,32 @@ class Configuration:
         # Update the secret key entry in the configuration.
         self.data["app"]["secret_key"] = app_secret
 
+    # Set default values for optional keys.
+    def _set_default_values(self: "Configuration") -> None:
+        # Set default values for the `bot` section.
+        self.data["bot"]["settings"]["model"] = self.data["bot"]["settings"].get("model", self.template.get("bot.settings.model"))
+
+        # Set default values for the `chat` section.
+        self.data["chat"]["stop_response_bot_triggered"] = self.data["chat"]["stop_response_bot_triggered"] or self.template.get("chat.stop_response_bot_triggered")
+        self.data["chat"]["stop_response_user_triggered"] = self.data["chat"]["stop_response_user_triggered"] or self.template.get("chat.stop_response_user_triggered")
+        self.data["chat"]["stop_button_label"] = self.data["chat"]["stop_button_label"] or self.template.get("chat.stop_button_label")
+        self.data["chat"]["initial_message"] = self.data["chat"]["initial_message"] or self.template.get("chat.initial_message")
+
+        # Set default values for the `study` section.
+        self.data["study"]["name"] = self.data["study"]["name"] or self.template.get("study.name")
+        self.data["study"]["protocol_process"] = self.data["study"]["protocol_process"] or self.template.get("study.protocol_process")
+        self.data["study"]["protocol_question_separator"] = self.data["study"]["protocol_question_separator"] or self.template.get("study.protocol_question_separator")
+
+        # Set default values for the `ui` section.
+        self.data["ui"]["welcome"]["html"] = self.data["ui"]["welcome"]["html"] or self.template.get("ui.welcome.html")
+        self.data["ui"]["consent"]["html"] = self.data["ui"]["consent"]["html"] or self.template.get("ui.consent.html")
+        self.data["ui"]["stop"]["html"] = self.data["ui"]["stop"]["html"] or self.template.get("ui.stop.html")
+        self.data["ui"]["stop"]["timeout"] = self.data["ui"]["stop"]["timeout"] or self.template.get("ui.stop.timeout")
+
+        # Special case for the `footer` dictionary.
+        self.data["ui"]["footer"]["content"] = self.data["ui"]["footer"].get("content", None)
+        self.data["ui"]["footer"]["html"] = self.data["ui"]["footer"].get("html", None)
+
     # Set the template.
     def _set_template(self: "Configuration") -> None:
         # Initialize the configuration template.
