@@ -2,6 +2,7 @@
 from typing import Any, Dict
 import os
 import tomllib
+import dotenv
 from boterview.services.configuration.template import Template
 
 # Helpers.
@@ -75,6 +76,15 @@ class Configuration:
         }
     }
 
+    # Load the `.env` file.
+    def _load_env_file(self: "Configuration") -> None:
+        # Find the `.env` file.
+        env_file = dotenv.find_dotenv()
+
+        # If the file exists.
+        if env_file:
+            # Load the `.env` file.
+            dotenv.load_dotenv(env_file)
 
     # Check that required configuration sections are present.
     def _validate_configuration_sections(self: "Configuration") -> None:
