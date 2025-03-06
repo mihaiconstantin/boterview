@@ -14,3 +14,22 @@ def read_contents(file: str) -> str:
 
     # Return the contents.
     return content
+
+
+# Write contents to a file.
+def write_contents(file: str | pathlib.Path, contents: str) -> None:
+    """
+    Write the contents to a file and return the status.
+    """
+
+    # Attempt to write the contents to the file.
+    try:
+        # Write the contents to the file.
+        with open(file, "w") as f:
+            # Write the contents.
+            f.write(contents)
+
+    # If an exception occurs.
+    except Exception as e:
+        # Throw.
+        raise e
