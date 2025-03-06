@@ -143,3 +143,9 @@ def list_to_enumeration(list: List[str], conjunction: str) -> str:
     # Return the output.
     return output
 
+
+# Wrap a string in markdown backticks with a given language.
+def markdown_code_block(text: str, language: str = "") -> str:
+    # Return the markdown code block.
+    return f"```{language}\n{text.strip()}\n```"
+
