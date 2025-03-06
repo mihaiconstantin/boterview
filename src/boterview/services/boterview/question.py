@@ -16,17 +16,31 @@ class Question(Printable):
         self.note = note
 
     # Prepare text version of the question.
-    def to_text(self: "Question") -> str:
-        # Prepare the string.
-        output: str = f"Question. { self.text }"
+    def to_text(self: "Question", **kwargs) -> str:
+        # Get the question number if any.
+        number: str = str(kwargs.get("number", ""))
+
+        # If there is no text for the question.
+        if not self.text:
+            # Return an empty string.
+            return ""
+
+        # Otherwise, prepare the output text.
+        output: str = "### Question " + number + "\n\n"
+
+        # Add the question text.
+        output += self.text
 
         # If there is a note.
         if self.note:
             # Add a new line.
-            output += "\n"
+            output += "\n\n"
+
+            # Add the note header.
+            output += "**Note.**\n\n"
 
             # Add the note to the string.
-            output += f"Note. { self.note }"
+            output += self.note
 
         # Return the string.
         return output
