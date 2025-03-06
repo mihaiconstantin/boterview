@@ -10,6 +10,12 @@ class Participant:
     # The participant consent status.
     consent: bool = False
 
+    # Start time.
+    start_time: datetime
+
+    # End time.
+    end_time: datetime
+
     # The condition name.
     condition_name: str | None
 
