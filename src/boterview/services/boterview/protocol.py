@@ -44,6 +44,17 @@ class Protocol(Printable):
         # Return the note.
         return result
 
+    # Remove the note identifier.
+    def _remove_note_annotation(self: "Protocol", question_note: str) -> str:
+        # Define the note annotation pattern.
+        pattern: re.Pattern = re.compile(r"^Note\.")
+
+        # Remove the note annotation.
+        result: str = pattern.sub("", question_note).strip()
+
+        # Return the note.
+        return result
+
     # Initialize the protocol.
     def __init__(self: "Protocol", file: str):
         # Parse the questions.
