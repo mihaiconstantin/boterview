@@ -11,6 +11,9 @@ import boterview.helpers.utils as utils
 
 # `Protocol` class.
 class Protocol(Printable):
+    # Unprocessed protocol.
+    raw: str = ""
+
     # The questions array.
     questions: List[Question] = []
 
@@ -99,8 +102,19 @@ class Protocol(Printable):
 
     # Initialize the protocol.
     def __init__(self: "Protocol", file: str):
-        # Parse the questions.
-        self.questions = parse_questions(file)
+        # Locally import the context.
+        import boterview.context.app as app
+
+        # Get the initialized configuration.
+        configuration: Configuration = app.get_configuration()
+
+        # Read the protocol file contents.
+        self.raw = utils.read_contents(file)
+
+        # If the protocol should be parsed.
+        if configuration.data["study"]["protocol_process"]:
+            # Parse the questions.
+            self.questions = self._parse_questions(file, configuration.data["study"]["protocol_question_separator"])
 
     # Prepare text version of the protocol.
     def to_text(self: "Protocol") -> str:
