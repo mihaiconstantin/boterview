@@ -10,10 +10,10 @@ from boterview.cli.commands.run import run
 sys.tracebacklimit = 0
 
 
-# The CLI group for the application commands.
+# Main CLI group for the application commands.
 @click.group()
 def cli():
-    """Below you can find the supported `boterview` command line interface (CLI) commands."""
+    """`boterview` commands for managing your study."""
     pass
 
 # Add the `preview` command to the group.
