@@ -1,5 +1,8 @@
 # Imports.
+from typing import List, LiteralString
 import pathlib
+import secrets
+import string
 
 
 # Parse the contents of a file.
@@ -53,4 +56,24 @@ def create_and_write_contents(file: str | pathlib.Path, contents: str) -> None:
 
     # Write the contents to the file.
     write_contents(file, contents)
+
+
+# Generate a random code as a study participation code.
+def generate_codes(quantity: int, length: int = 6) -> List[str]:
+    # Create a placeholder for the codes.
+    codes: List[str] = []
+
+    # Define the allowed characters for the code.
+    characters: LiteralString = string.ascii_letters + string.digits
+
+    # Generate the codes.
+    for _ in range(quantity):
+        # Generate a random code.
+        code: str = "".join(secrets.choice(characters) for _ in range(length)).upper()
+
+        # Append the code to the list of codes.
+        codes.append(code)
+
+    # Return the list of codes.
+    return codes
 
