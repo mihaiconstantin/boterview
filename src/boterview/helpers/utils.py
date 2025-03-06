@@ -1,5 +1,5 @@
 # Imports.
-from typing import List, LiteralString
+from typing import Any, List, Type, LiteralString, get_origin, get_args
 import pathlib
 import textwrap
 import os
@@ -155,3 +155,14 @@ def markdown_code_block(text: str, language: str = "") -> str:
 def sanitize(text: str) -> str:
     # Return the trimmed and unindented string.
     return textwrap.dedent(text).strip()
+
+
+# Check if a given type annotation is optional (i.e., it contains `None`).
+def is_optional(expected_type: Type[Any]) -> bool:
+    # If the type is optional.
+    if get_origin(expected_type) is not None and type(None) in get_args(expected_type):
+        # Return `True`.
+        return True
+
+    # Otherwise, return `False`.
+    return False
