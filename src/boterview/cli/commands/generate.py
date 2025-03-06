@@ -39,3 +39,18 @@ def codes(quantity: int, file: str):
 
     # Print a success message.
     click.echo(f"Generated { quantity } codes written to '{ file }'.")
+
+
+# Subcommand for generating a random secret.
+@generate.command(name = "secret")
+def secret():
+    """Command to generate a random secret."""
+
+    # Generate a secret.
+    secret: str = utils.generate_secret()
+
+    # Print the secret.
+    click.echo(
+        f"Generated secret: {secret}\n"
+        "You may copy this secret to your configuration file."
+    )
