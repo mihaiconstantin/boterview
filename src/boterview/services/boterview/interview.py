@@ -1,4 +1,5 @@
 # Imports.
+from typing import List
 from boterview.services.boterview.printable import Printable
 from boterview.services.boterview.protocol import Protocol
 from boterview.services.boterview.guide import Guide
@@ -42,20 +43,29 @@ class Interview(Printable):
 
     # Render the interview as text.
     def to_text(self: "Interview") -> str:
+        # Collect the parts of the interview in the order they should appear.
+        parts = [
+            # The guide.
+            self.guide.to_text(),
+
+            # The introduction.
+            self.introduction.to_text(),
+
+            # The closing.
+            self.closing.to_text(),
+
+            # The protocol.
+            self.protocol.to_text()
+        ]
+
+        # Include the parts that are not empty in the output.
+        present_parts: List[str] = [part for part in parts if part != ""]
+
         # Prepare the output text.
         output: str = "# Interview Document\n\n"
 
-        # Add the guide.
-        output += self.guide.to_text() + "\n\n"
-
-        # Add the protocol.
-        output += self.introduction.to_text() + "\n\n"
-
-        # Add the closing.
-        output += self.closing.to_text() + "\n\n"
-
-        # Add the protocol.
-        output += self.protocol.to_text() + "\n"
+        # Add the parts to the output.
+        output += "\n\n".join(present_parts) + "\n"
 
         # Return the string.
         return output
