@@ -1,4 +1,5 @@
 # Imports.
+from typing import List
 from boterview.services.boterview.code import Code
 from boterview.services.boterview.participant import Participant
 from boterview.services.boterview.study import Study
@@ -19,6 +20,41 @@ class Boterview:
 
     # The `Study` object.
     study: Study
+
+    # Read the participation codes from file.
+    def _parse_codes(self: "Boterview", file: str) -> List[Code]:
+        """
+        Read the codes from a file and return them as a list. Each code is a
+        string representing a unique participation code.
+        """
+
+        # Open the file.
+        with open(file, "r") as f:
+            # Get the contents.
+            contents = f.read()
+
+        # Split contents by new line.
+        codes: List[str] = contents.split("\n")
+
+        # Exclude empty lines.
+        codes = [code for code in codes if code]
+
+        # Remove leading and trailing whitespace.
+        codes = [code.strip() for code in codes]
+
+        # Initialize the list of codes.
+        code_objects: List[Code] = []
+
+        # For each code.
+        for code in codes:
+            # Initialize the code object.
+            code_object: Code = Code(code)
+
+            # Append the code to the list of codes.
+            code_objects.append(code_object)
+
+        # Return the list of codes.
+        return code_objects
 
     # Initialize the `Boterview` object.
     def __init__(self: "Boterview", configuration: str) -> None:
