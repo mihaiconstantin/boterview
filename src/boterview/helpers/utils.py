@@ -1,6 +1,7 @@
 # Imports.
 from typing import List, LiteralString
 import pathlib
+import os
 import secrets
 import string
 
@@ -88,4 +89,18 @@ def generate_secret(length: int = 64):
 
     # Return the secret.
     return secret
+
+
+# Get the a variable from the environment.
+def get_environment_variable(variable: str) -> str:
+    # Get the value of the environment variable.
+    value: str | None = os.environ.get(variable)
+
+    # If the value is not available.
+    if not value:
+        # Raise an exception.
+        raise ValueError(f"The environment variable \"{ variable }\" is not available. Please set it.")
+
+    # Return the value of the environment variable.
+    return value
 
