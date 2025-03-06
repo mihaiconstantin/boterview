@@ -40,3 +40,7 @@ class Condition:
 
         # Also set the condition name on the participant.
         participant.set_condition_name(self.name)
+
+        # As well as the system prompt.
+        participant.set_prompt(self.to_text())
+
