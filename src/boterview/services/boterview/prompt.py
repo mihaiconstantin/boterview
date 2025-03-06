@@ -13,7 +13,7 @@ class Prompt(Printable):
     # Initialize the prompt.
     def __init__(self: "Prompt", file: str):
         # Read and set the text from the file.
-        self.text = read_contents(file)
+        self.text = utils.read_contents(file)
 
     # Prepare text.
     def to_text(self: "Prompt") -> str:
