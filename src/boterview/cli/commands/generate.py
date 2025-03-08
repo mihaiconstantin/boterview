@@ -63,7 +63,7 @@ def secret():
 
 # Subcommand for an example study setup.
 @generate.command(name = "study")
-@click.option("-p", "--path", type = str, required = True, help = "The path to scaffold the study setup.")
+@click.option("-p", "--path", type = str, required = True, help = "The path where to scaffold the study setup.")
 @click.option("-q", "--quantity", type = int, required = True, help = "The amount of participation codes to generate.")
 @click.option("-c", "--config", type = str, required = False, default = "study.toml", help = "The name of the configuration file.")
 @click.option("-s", "--secret", is_flag = True, help = "Whether to include a secret in the configuration file.")
