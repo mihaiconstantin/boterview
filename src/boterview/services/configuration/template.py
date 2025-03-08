@@ -72,7 +72,7 @@ class Template:
                 # If the key is in the list of files.
                 if key in self.files:
                     # Write the file path.
-                    value = str(directory / value)
+                    value = (directory / value).as_posix()
 
                 # If the value is a string.
                 if isinstance(value, str):
