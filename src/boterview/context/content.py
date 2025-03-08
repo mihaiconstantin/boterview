@@ -101,7 +101,7 @@ TEMPLATE: Dict[str, Any] = {
                 "comment": "The footer settings. If omitted, the default footer will be used.",
                 "value": {
                     "content": {
-                        "comment": "The file containing the content for the footer. The default is not to use `HTML` and instead each chunk separated by an empty line will be rendered as a `div`.",
+                        "comment": "The file containing the content for the footer. When not using `HTML`, each chunk separated by an empty line will be rendered as a `div`.",
                         "value": "ui/footer.md"
                     },
                     "html": {
