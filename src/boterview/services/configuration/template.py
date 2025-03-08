@@ -59,7 +59,7 @@ class Template:
                     secret = secret
                 )
 
-            # Otherwise, the value is a string.
+            # Otherwise, the value is a string, not a dictionary.
             else:
                 # Write the comment.
                 toml += f"# {comment}" + new_line
