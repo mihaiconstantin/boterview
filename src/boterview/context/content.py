@@ -93,7 +93,7 @@ TEMPLATE: Dict[str, Any] = {
                     },
                     "timeout": {
                         "comment": "The timeout for the stop page. If omitted, the default timeout will be used.",
-                        "value": 60
+                        "value": 30
                     }
                 }
             },
@@ -101,7 +101,7 @@ TEMPLATE: Dict[str, Any] = {
                 "comment": "The footer settings. If omitted, the default footer will be used.",
                 "value": {
                     "content": {
-                        "comment": "The file containing the content for the footer. The default is not to use `HTML` and instead each chunk separated by an empty line will be rendered as a `div`.",
+                        "comment": "The file containing the content for the footer. When not using `HTML`, each chunk separated by an empty line will be rendered as a `div`.",
                         "value": "ui/footer.md"
                     },
                     "html": {
@@ -242,9 +242,9 @@ CONTENT: Dict[str, Dict[str, str] | Dict[str, Dict[str, str]]] = {
                     page, causing the study to terminate.
                 </li>
                 <li>
-                    They typed the termination phrase "stop ABCDEF" in the chat
-                    interface and confirmed their wish to stop by clicking the
-                    provided button.
+                    They typed the termination phrase "{{ termination }}" in the
+                    chat interface and confirmed their wish to stop by clicking
+                    the provided button.
                 </li>
                 <li>
                     They completed the interview, the bot triggered the end of
