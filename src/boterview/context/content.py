@@ -242,9 +242,9 @@ CONTENT: Dict[str, Dict[str, str] | Dict[str, Dict[str, str]]] = {
                     page, causing the study to terminate.
                 </li>
                 <li>
-                    They typed the termination phrase "stop ABCDEF" in the chat
-                    interface and confirmed their wish to stop by clicking the
-                    provided button.
+                    They typed the termination phrase "{{ termination }}" in the
+                    chat interface and confirmed their wish to stop by clicking
+                    the provided button.
                 </li>
                 <li>
                     They completed the interview, the bot triggered the end of
