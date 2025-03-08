@@ -1,13 +1,19 @@
 # Imports.
-from datetime import datetime
 from typing import List, Dict
-from boterview.backend.printable import Printable
+from datetime import datetime, timezone
+from boterview.services.boterview.printable import Printable
+
+# Helpers.
+import boterview.helpers.utils as utils
 
 
 # `Conversation` class for the chat between the bot and the participant.
 class Conversation(Printable):
-    # Participant ID.
-    participant_id: str
+    # Allowed message types.
+    _message_type: List[str] = ["bot", "participant"]
+
+    # Participant code (i.e., aka ID).
+    participant_code: str
 
     # History.
     history: List[Dict[str, str]]
@@ -17,21 +23,22 @@ class Conversation(Printable):
         # Initialize an empty history.
         self.history = []
 
-    # Set the participant ID.
-    def set_participant_id(self: "Conversation", participant_id: str) -> None:
-        # Set the participant ID.
-        self.participant_id = participant_id
+    # Set the participant code.
+    def set_participant_code(self: "Conversation", participant_code: str) -> None:
+        # Set the participant code.
+        self.participant_code = participant_code
 
     # Append a message to the history.
     def append_message(self: "Conversation", type: str, message: str) -> None:
         # Validate the message type.
-        if type not in ["bot", "participant"]:
-            raise ValueError(f"Invalid conversation message type: '{type}'.")
+        if type not in self._message_type:
+            # Throw.
+            raise ValueError(f"Invalid conversation message type: \"{type}\". Must be one of {utils.list_to_enumeration(self._message_type, "or")}.")
 
         # Append the message to the history.
         self.history.append({
             "type": type,
-            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
             "message": message
         })
 
@@ -43,7 +50,7 @@ class Conversation(Printable):
         # For each message in the history.
         for message in self.history:
             # Add the message to the text.
-            text += f"{message['timestamp']} - {message['type'].capitalize()}: {message['message']}\n"
+            text += f"{message["timestamp"]} - {message["type"].capitalize()}: {message["message"]}\n"
 
         # Return the text.
         return text

@@ -1,5 +1,15 @@
+# Imports.
+from typing import List
+
+# Helpers.
+import boterview.helpers.utils as utils
+
+
 # `Counter` class for counting occurrences of conditions and participants.
 class Counter:
+    # Counter type.
+    _counter_type: List[str] = ["conditions", "participants"]
+
     # Count of conditions.
     conditions: int = 0
 
@@ -21,4 +31,4 @@ class Counter:
         # Otherwise.
         else:
             # Raise an error.
-            raise ValueError("Invalid value for `what` argument of `Counter` class.")
+            raise ValueError(f"Invalid counter type: \"{what}\". Must be one of {utils.list_to_enumeration(self._counter_type, "or")}.")

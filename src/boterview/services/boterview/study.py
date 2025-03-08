@@ -1,10 +1,10 @@
 # Imports.
 from typing import Dict, List
 import random
-from .counter import Counter
-from .condition import Condition
-from .participant import Participant
-from boterview.backend.prompt import Prompt
+from boterview.services.boterview.code import Code
+from boterview.services.boterview.condition import Condition
+from boterview.services.boterview.participant import Participant
+from boterview.services.boterview.counter import Counter
 
 
 # `Study` class for conducting interviews.
@@ -15,14 +15,14 @@ class Study:
     # Generic counter.
     counter: Counter
 
+    # Participation codes.
+    codes: List[Code]
+
     # Dictionary of conditions.
     conditions: Dict[str, Condition]
 
     # Initialize the study.
     def __init__(self: "Study") -> None:
-        # Set the study name.
-        self.name = None
-
         # Initialize the counter.
         self.counter = Counter()
 
@@ -33,6 +33,11 @@ class Study:
     def set_name(self: "Study", name: str) -> None:
         # Set the study name.
         self.name = name
+
+    # Set the participation codes.
+    def set_codes(self: "Study", codes: List[Code]) -> None:
+        # Set the participation codes.
+        self.codes = codes
 
     # Append a condition.
     def append_condition(self: "Study", condition: Condition) -> None:
@@ -62,3 +67,13 @@ class Study:
 
         # Increment the participants counter.
         self.counter.increment(what = "participants")
+
+    # Get a participation object by code.
+    def get_participant(self: "Study", code: str) -> Participant | None:
+        # Find the participant in the conditions.
+        participant: Participant | None = next(
+            (p for c in self.conditions.values() for p in c.participants if p.code == code), None
+        )
+
+        # Return the participant.
+        return participant

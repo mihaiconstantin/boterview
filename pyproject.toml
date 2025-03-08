@@ -1,32 +1,110 @@
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
+# Project metadata.
 [project]
+
+# Package name
 name = "boterview"
-version = "0.0.1"
+
+# Package version.
+version = "1.0.0"
+
+# Package description.
+description = "Effortlessly conduct chatbot-based interviews with customizable protocols and randomized condition assignments, tailored for social science research."
+
+# Package keywords.
+keywords = [
+    "chatbot",
+    "interview",
+    "research",
+    "survey",
+    "social science",
+    "LLM"
+]
+
+# Package authors.
 authors = [
-  { name="Mihai Constantin", email = "mihai@mihaiconstantin.com" },
-  { name="Erwin Gielens", email = "erwin.gielens@gmail.com" }
+    { name = "Mihai Constantin", email = "mihai@mihaiconstantin.com" }
 ]
-description = "Easily deploy chatbot-based interviews with customizable protocols and randomized condition assignment for social science research."
+
+# Package maintainers.
+maintainers = [
+    { name = "Mihai Constantin", email = "mihai@mihaiconstantin.com" }
+]
+
+# The `README.md` file.
 readme = "README.md"
-requires-python = ">=3.10"
-dependencies = [
-  "click",
-  "openai",
-  "chainlit"
-]
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent"
-]
+
+# Package license type and file.
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
 
+# The classifiers for the package.
+classifiers = [
+    # Package maturity.
+    "Development Status :: 5 - Production/Stable",
+
+    # Package audience.
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+
+    # Package topic.
+    "Topic :: Communications :: Chat",
+    "Topic :: Education",
+    "Topic :: Sociology",
+
+    # Package `python` support.
+    "Programming Language :: Python :: 3.10",
+
+    # Package `OS` support.
+    "Operating System :: OS Independent"
+]
+
+# Python version requirements.
+requires-python = ">=3.10"
+
+# Package dependencies.
+dependencies = [
+  "click",
+  "uvicorn",
+  "fastapi",
+  "peewee",
+  "pydantic",
+  "python-dotenv",
+  "tomli",
+  "pyjwt",
+  "openai",
+  "chainlit"
+]
+
+# The package `boterview` command-line interface.
 [project.scripts]
 boterview = "boterview.cli.cli:cli"
 
+# Package URLs.
 [project.urls]
-Homepage = "https://github.com/mihaiconstantin/boterview"
+Homepage = "https://boterview.mihaiconstantin.com"
+Repository = "https://github.com/mihaiconstantin/boterview"
 Issues = "https://github.com/mihaiconstantin/boterview/issues"
+Changelog = "https://github.com/mihaiconstantin/boterview/blob/main/CHANGELOG.md"
+
+
+# Build system.
+[build-system]
+
+# Build backend.
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+# Tool configuration.
+[tool]
+
+# `Hatch` configuration.
+[tool.hatch]
+
+# Keep folder structure for the `.tar.gz` and include files tracked by `git`.
+[tool.hatch.build.targets.sdist]
+sources = []
+
+# Flatten folder structure for the `.whl`.
+[tool.hatch.build.targets.wheel]
+sources = ["src"]
