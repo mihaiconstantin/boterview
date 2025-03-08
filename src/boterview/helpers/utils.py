@@ -81,7 +81,7 @@ def generate_codes(quantity: int, length: int = 6) -> List[str]:
 
 
 # Generate a random application secret.
-def generate_secret(length: int = 64):
+def generate_secret(length: int = 64) -> str:
     # Define the allowed characters for the secret.
     chars: LiteralString = string.ascii_letters + string.digits + "$%*,-./:=>?@^_~"
 
