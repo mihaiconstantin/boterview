@@ -93,7 +93,7 @@ TEMPLATE: Dict[str, Any] = {
                     },
                     "timeout": {
                         "comment": "The timeout for the stop page. If omitted, the default timeout will be used.",
-                        "value": 60
+                        "value": 30
                     }
                 }
             },
