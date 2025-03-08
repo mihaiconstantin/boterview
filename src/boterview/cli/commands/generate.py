@@ -66,7 +66,8 @@ def secret():
 @click.option("-p", "--path", type = str, required = True, help = "The path to scaffold the study setup.")
 @click.option("-q", "--quantity", type = int, required = True, help = "The amount of participation codes to generate.")
 @click.option("-c", "--config", type = str, required = False, default = "study.toml", help = "The name of the configuration file.")
-def study(path: str, quantity: int, config: str):
+@click.option("-s", "--secret", is_flag = True, help = "Whether to include a secret in the configuration file.")
+def study(path: str, quantity: int, config: str, secret: bool):
     """Command to scaffold an example study setup at the path provided."""
 
     # Define the the scaffolding location.
@@ -78,7 +79,10 @@ def study(path: str, quantity: int, config: str):
     # Write the configuration file.
     utils.create_and_write_contents(
         file = location / f"{config}",
-        contents = configuration.template.to_toml(directory = location)
+        contents = configuration.template.to_toml(
+            directory = location,
+            secret = secret
+        )
     )
 
     # Prepare the list of files to write.

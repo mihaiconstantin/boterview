@@ -19,7 +19,7 @@ class Template:
     files: List[str] = []
 
     # Recursively generate a `TOML` string from the configuration template.
-    def _parse_template_to_toml(self: "Template", config: Dict[str, Any], parent: str, directory: pathlib.Path) -> str:
+    def _parse_template_to_toml(self: "Template", config: Dict[str, Any], parent: str, *, directory: pathlib.Path, secret: bool) -> str:
         # Define commonly used strings.
         new_line: str = "\n"
         empty_line: str = "\n\n"
@@ -55,13 +55,19 @@ class Template:
                 toml += self._parse_template_to_toml(
                     config = value,
                     parent = section_name,
-                    directory = directory
+                    directory = directory,
+                    secret = secret
                 )
 
             # Otherwise, the value is a string.
             else:
                 # Write the comment.
                 toml += f"# {comment}" + new_line
+
+                # If the key represents the `secret_key` and a secret is requested.
+                if key == "secret_key" and secret:
+                    # Generate a secret.
+                    value = utils.generate_secret()
 
                 # If the key is in the list of files.
                 if key in self.files:
@@ -148,7 +154,7 @@ class Template:
             raise ValueError(f"Setting \"{setting}\" is not properly structured in the template.")
 
     # Print the configuration template to text.
-    def to_toml(self: "Template", directory: pathlib.Path) -> str:
+    def to_toml(self: "Template", directory: pathlib.Path, secret: bool) -> str:
         # Initialize the text.
         toml: str = "# Configuration file for the `boterview` application."
 
@@ -156,7 +162,8 @@ class Template:
         toml += self._parse_template_to_toml(
             config = self.content,
             parent = "",
-            directory = directory
+            directory = directory,
+            secret = secret
         )
 
         # Return the `TOML` string.
