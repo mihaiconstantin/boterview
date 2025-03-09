@@ -1,0 +1,12 @@
+/* Import Tailwind. */
+@import "tailwindcss";
+
+
+/* Custom colors. */
+@theme {
+    --color-boterview-text: #393F4A;
+    --color-boterview-orange: #D97D5A;
+    --color-boterview-gray: #DCD2CC;
+    --color-boterview-background-dark: #212121;
+    --color-boterview-text-dark: #EDEDED;
+}
