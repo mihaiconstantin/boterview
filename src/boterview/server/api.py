@@ -5,7 +5,9 @@ from fastapi import APIRouter, Request, Response, status
 from fastapi.responses import JSONResponse
 from boterview.models.api.code import CodePayload
 from boterview.models.api.participant import ParticipantPayload
+from boterview.models.api.secret import SecretPayload
 from boterview.services.boterview.boterview import Boterview
+from boterview.services.configuration.configuration import Configuration
 from boterview.services.ui.ui import UI
 
 # Import database models.
@@ -237,3 +239,45 @@ async def logout(request: Request) -> JSONResponse:
 
     # Return the response.
     return response
+
+
+# Define a markdown download data endpoint.
+@router.post("/download")
+async def download(payload: SecretPayload) -> Response:
+    # Get the current configuration instance.
+    configuration: Configuration = app.get_configuration()
+
+    # Get the secret key from the configuration.
+    secret: str = configuration.data["app"]["secret_key"]
+
+    # Validate the secret key.
+    if payload.secret != secret:
+        # Return an unauthorized response.
+        return JSONResponse(
+            content = {"status": "error", "message": "Unauthorized access."},
+            status_code = status.HTTP_401_UNAUTHORIZED
+        )
+
+    # Get the `boterview` instance from the context.
+    boterview: Boterview = app.get_boterview()
+
+    # Parse the database and get the content as a string.
+    content: str = storage.parse_database(boterview)
+
+    # Format the study name.
+    study_name: str = (boterview.study.name or "Interview Study").lower().replace(" ", "-")
+
+    # Format the download timestamp.
+    timestamp: str = datetime.now(timezone.utc).strftime("%Y-%m-%d-%H-%M-%S")
+
+    # Define the headers.
+    headers: Dict[str, str] = {
+        f"Content-Disposition": f"attachment; filename=output-{study_name}-{timestamp}.md"
+    }
+
+    # Return the response.
+    return Response(
+        content = content,
+        media_type = "text/markdown",
+        headers = headers
+    )
