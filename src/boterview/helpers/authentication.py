@@ -2,6 +2,10 @@
 from typing import Callable, Dict
 import jwt
 from datetime import datetime, timedelta, timezone
+from boterview.services.configuration.configuration import Configuration
+
+# Import the application context.
+import boterview.context.app as app
 
 
 # Parse the cookie header as a dictionary.
@@ -13,7 +17,25 @@ def parse_cookie(cookie: str) -> Dict[str, str]:
     return cookies
 
 
+# Decorator to inject the application secret for the JWT functions.
+def with_application_secret(function: Callable[..., str]) -> Callable[..., str]:
+    # Define the wrapper function.
+    def wrapper(*args, **kwargs) -> str:
+        # Get the configuration.
+        configuration: Configuration = app.get_configuration()
+
+        # Get the secret key.
+        secret: str = configuration.data["app"]["secret_key"]
+
+        # Call the function with the secret key.
+        return function(*args, **kwargs, secret = secret)
+
+    # Return the wrapper.
+    return wrapper
+
+
 # Create a JWT from the participation code.
+@with_application_secret
 def create_jwt(code: str, secret: str) -> str:
     # If the secret is not provided.
     if not secret:
@@ -40,6 +62,7 @@ def create_jwt(code: str, secret: str) -> str:
 
 
 # Decode the JWT from the participation code.
+@with_application_secret
 def decode_jwt(token: str, secret) -> str:
     # If the secret is not provided.
     if not secret:
