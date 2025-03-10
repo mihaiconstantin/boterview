@@ -1,5 +1,11 @@
 # Changelog
 
+## boterview 1.0.2
+
+## Changed
+- Update badges in `README.md`.
+- Update heading capitalization in `CHANGELOG.md`.
+
 ## boterview 1.0.1
 
 ### Changed
