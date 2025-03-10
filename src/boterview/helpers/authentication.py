@@ -1,6 +1,7 @@
 # Imports.
 from typing import Callable, Dict
 import jwt
+from fastapi import Request
 from datetime import datetime, timedelta, timezone
 from boterview.services.configuration.configuration import Configuration
 
@@ -79,3 +80,25 @@ def decode_jwt(token: str, secret) -> str:
 
     # Return the code.
     return decoded_jwt["code"]
+
+
+# Define a function to check if the user is authenticated.
+def is_authenticated(request: Request) -> bool:
+    # Retrieve the code cookie.
+    code_cookie: str | None = request.cookies.get("code")
+
+    # If the code cookie is not present.
+    if not code_cookie:
+        return False
+
+    # Attempt to decode the code cookie.
+    try:
+        # Decode the code cookie.
+        decode_jwt(code_cookie)
+
+    # Catch any exceptions.
+    except Exception:
+        return False
+
+    # Return authenticated.
+    return True
