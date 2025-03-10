@@ -199,3 +199,41 @@ async def action(request: Request) -> JSONResponse:
         content = {"status": "error", "message": "Invalid action."},
         status_code = status.HTTP_400_BAD_REQUEST
     )
+
+
+# Define a logout endpoint.
+@router.post("/logout")
+async def logout(request: Request) -> JSONResponse:
+    # Get the code from the cookie by decoding the JWT.
+    code: str | None  = authentication.get_code(request)
+
+    # If the code is missing, return an unauthorized response.
+    if not code:
+        # Return the response.
+        return JSONResponse(
+            content = {"status": "error", "message": "Authentication required."},
+            status_code = status.HTTP_401_UNAUTHORIZED
+        )
+
+    # Get the participant by the code.
+    participant: ParticipantModel = storage.get_participant(code)
+
+    # Update the participant record in the database.
+    participant.end_time = datetime.now(timezone.utc) # type: ignore
+
+    # Save the participant record.
+    participant.save()
+
+    # Prepare the redirect response.
+    response = JSONResponse(
+        content = {"status": "success", "message": "Logout successful."},
+        status_code = status.HTTP_200_OK
+    )
+
+    # Delete the cookies.
+    response.delete_cookie("code")
+    response.delete_cookie("consent")
+    response.delete_cookie("access_token")
+
+    # Return the response.
+    return response
