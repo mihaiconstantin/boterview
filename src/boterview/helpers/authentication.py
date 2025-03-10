@@ -102,3 +102,27 @@ def is_authenticated(request: Request) -> bool:
 
     # Return authenticated.
     return True
+
+
+# Get the code from the request.
+def get_code(request: Request) -> str | None:
+    # Retrieve the code cookie.
+    code_cookie: str | None = request.cookies.get("code")
+
+    # If the code cookie is not present.
+    if not code_cookie:
+        # Return.
+        return None
+
+    # Attempt to decode the code cookie.
+    try:
+        # Decode the code cookie
+        code: str = decode_jwt(code_cookie)
+
+        # Return the code.
+        return code
+
+    # Catch any exceptions.
+    except Exception:
+        # Return.
+        return None
