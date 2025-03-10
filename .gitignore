@@ -177,3 +177,6 @@ cython_debug/
 *.drawio.bkp*
 **.DS_Store
 *.db
+
+# Node modules.
+node_modules/
