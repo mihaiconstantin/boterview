@@ -112,3 +112,60 @@ def mount_chat(server: FastAPI):
         target = str(PACKAGE_SOURCE / "chat" / "chat.py"),
         path = "/chat/"
     )
+
+
+# Create a server instance.
+def create_server(port_backend: int, port_frontend: int, database: str, headless: bool) -> FastAPI:
+    # Create a lifespan event handler.
+    lifespan = create_lifespan(database)
+
+    # Create a `FastAPI` instance.
+    server: FastAPI = FastAPI(
+        lifespan = lifespan,
+        title = "Boterview",
+
+        # Disable API documentation.
+        docs_url = None,
+        redoc_url = None,
+        openapi_url = None
+    )
+
+    # Define the allowed origins.
+    origins: Dict[str, str] = {
+        # Frontend development server.
+        "frontend": f"http://localhost:{ port_frontend }",
+
+        # Production server.
+        "backend": f"http://localhost:{ port_backend }"
+    }
+
+    # Store the headless flag on the state.
+    server.state.headless = headless
+
+    # Store the origins on the state.
+    server.state.origins = {
+        "frontend": origins["frontend"],
+        "backend": origins["backend"]
+    }
+
+    # Add CORS middleware to the server.
+    server.add_middleware(
+        CORSMiddleware,
+        allow_origins = [
+            origins["frontend"],
+            origins["backend"]
+        ],
+        allow_credentials = True,
+        allow_methods = ["*"],
+        allow_headers = ["*"],
+        expose_headers = ["Content-Disposition"]
+    )
+
+    # Mount the chat application.
+    mount_chat(server)
+
+    # Mount the frontend application.
+    mount_frontend(server)
+
+    # Return the server instance.
+    return server
