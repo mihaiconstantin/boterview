@@ -117,3 +117,10 @@ sources = ["src"]
 # Hook to build the package frontend.
 [tool.hatch.build.targets.wheel.hooks.custom]
 path = "hooks/frontend.py"
+
+# Hatch `run` commands.
+[tool.hatch.envs]
+
+# Command to build the frontend.
+[tool.hatch.envs.frontend.scripts]
+build = "cd frontend/app && pnpm install && pnpm run build"
