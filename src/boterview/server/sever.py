@@ -1,4 +1,5 @@
 # Imports.
+import os
 import pathlib
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
@@ -9,6 +10,7 @@ from boterview.models.database.conversation import Conversation
 from boterview.models.database.participant import Participant
 
 # Import the context.
+import boterview.context.app as app
 import boterview.context.persistence as persistence
 import boterview.context.path as path
 
@@ -82,3 +84,31 @@ def mount_frontend(server: FastAPI):
 
             # Otherwise, serve the index file.
             return FileResponse(FRONTEND_APP_BUILD / "index.html")
+
+
+# Mount the chat application.
+def mount_chat(server: FastAPI):
+    # Get the secret key from the configuration.
+    SECRET_KEY = app.get_configuration().data["app"]["secret_key"]
+
+    # Get the package root directory.
+    PACKAGE_SOURCE: pathlib.Path = path.get_package_source()
+
+    # Get the package root directory.
+    PACKAGE_ROOT: pathlib.Path = path.get_package_root()
+
+    # Set the chat application path.
+    os.environ["CHAINLIT_APP_ROOT"] = str(PACKAGE_ROOT / "frontend" / "chat")
+
+    # Set the `chainlit` authentication variables.
+    os.environ["CHAINLIT_AUTH_SECRET"] = SECRET_KEY
+
+    # Local imports.
+    from chainlit.utils import mount_chainlit
+
+    # Mount the `chainlit` instance.
+    mount_chainlit(
+        app = server,
+        target = str(PACKAGE_SOURCE / "chat" / "chat.py"),
+        path = "/chat/"
+    )
