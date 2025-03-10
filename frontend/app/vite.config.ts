@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
             port: 5173,
 
             // Proxy.
-            proxy: {
+            proxy: mode == "development" ? {
                 '/api': {
                     target: env.BOTERVIEW_BACKEND_URL,
                     changeOrigin: true,
@@ -32,9 +32,10 @@ export default defineConfig(({ mode }) => {
                 '/chat': {
                     target: env.BOTERVIEW_BACKEND_URL,
                     changeOrigin: true,
-                    secure: false
+                    secure: false,
+                    ws: true
                 }
-            }
+            } : undefined
         }
     }
 });
