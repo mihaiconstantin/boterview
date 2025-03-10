@@ -31,5 +31,8 @@ cli.add_command(generate)
 # Add the `parse` command to the group.
 cli.add_command(parse)
 
+
+# If the script is run directly.
 if __name__ == "__main__":
+    # Run the CLI.
     cli()
