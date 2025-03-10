@@ -1,8 +1,10 @@
 # Imports.
 from typing import Dict, List
+from datetime import datetime, timezone
 from fastapi import APIRouter, Request, Response, status
 from fastapi.responses import JSONResponse
 from boterview.models.api.code import CodePayload
+from boterview.models.api.participant import ParticipantPayload
 from boterview.services.boterview.boterview import Boterview
 from boterview.services.ui.ui import UI
 
@@ -11,6 +13,7 @@ from boterview.models.database.participant import Participant as ParticipantMode
 
 # Import helpers.
 import boterview.helpers.authentication as authentication
+import boterview.helpers.storage as storage
 
 # Import the application context.
 import boterview.context.app as app
@@ -94,6 +97,54 @@ async def verify(payload: CodePayload) -> JSONResponse:
     response.set_cookie(
         key = "code",
         value = token,
+        httponly = True
+    )
+
+    # Return the response.
+    return response
+
+
+# Define a participant consent endpoint.
+@router.post("/consent")
+async def consent(payload: ParticipantPayload, request: Request) -> JSONResponse:
+    # Get the code from the cookie by decoding the JWT.
+    code: str | None  = authentication.get_code(request)
+
+    # If the code is missing, return an unauthorized response.
+    if not code:
+        # Return the response.
+        return JSONResponse(
+            content = {"status": "error", "message": "Authentication required."},
+            status_code = status.HTTP_401_UNAUTHORIZED
+        )
+
+    # If the user hasn't consented.
+    if not payload.consented:
+        # Return the response.
+        return JSONResponse(
+            content = {"status": "error", "message": "Consent not given."},
+            status_code = status.HTTP_401_UNAUTHORIZED
+        )
+
+    # Get the participant by the code.
+    participant: ParticipantModel = storage.get_participant(code)
+
+    # Update the consent status.
+    participant.consent = True # type: ignore
+
+    # Save the participant.
+    participant.save()
+
+    # Prepare the response.
+    response: Response = JSONResponse(
+        content = {"status": "success", "message": "Consent processed."},
+        status_code = status.HTTP_200_OK
+    )
+
+    # Attach token as a cookie to the response.
+    response.set_cookie(
+        key = "consent",
+        value = datetime.now(timezone.utc).isoformat(),
         httponly = True
     )
 
