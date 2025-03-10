@@ -1,5 +1,13 @@
 # Changelog
 
+## Boterview 1.0.1
+
+### Changed
+- Update build artifacts to exclude unnecessary `assets/` directory.
+- Update logo path in `README.md` to use use the `GitHub` raw link.
+- Remove the `CC` license images from the `README.md` file do to rendering
+  issues on `PyPI`.
+
 ## Boterview 1.0.0
 
 ### Added
