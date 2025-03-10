@@ -150,3 +150,52 @@ async def consent(payload: ParticipantPayload, request: Request) -> JSONResponse
 
     # Return the response.
     return response
+
+
+# Define an action endpoint.
+@router.post("/action")
+async def action(request: Request) -> JSONResponse:
+    # If the user is not authenticated.
+    if not authentication.is_authenticated(request):
+        # Return the response.
+        return JSONResponse(
+            content = {"status": "error", "message": "Authentication required."},
+            status_code = status.HTTP_401_UNAUTHORIZED
+        )
+
+    # If the user is authenticated, get the request body.
+    body: Dict = await request.json()
+
+    # Get the action from the request body.
+    action: str | None = body.get("action")
+
+    # If the action is not present.
+    if action is None:
+        # Return the response.
+        return JSONResponse(
+            content = {"status": "error", "message": "Action not specified."},
+            status_code = status.HTTP_400_BAD_REQUEST
+        )
+
+    # If the action is `stop`.
+    if action == "stop":
+        # If the application was started in headless mode.
+        if request.app.state.headless:
+            # Use the frontend origin.
+            origin: str = request.app.state.origins["frontend"]
+        # Otherwise.
+        else:
+            # Use the backend origin.
+            origin: str = request.app.state.origins["backend"]
+
+        # Return a redirect response.
+        return JSONResponse(
+            content = {"status": "success", "url": origin + "/stop"},
+            status_code = status.HTTP_200_OK
+        )
+
+    # For any unknown action.
+    return JSONResponse(
+        content = {"status": "error", "message": "Invalid action."},
+        status_code = status.HTTP_400_BAD_REQUEST
+    )
