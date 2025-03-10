@@ -48,3 +48,57 @@ const interceptRequest = (pathname, method, callback) => {
         return originalFetch.apply(this, args);
     }
 }
+
+
+// Intercept the `/action` endpoint.
+interceptRequest("/chat/project/action", "POST", (response) => {
+    // Clone the response.
+    const clonedResponse = response.clone();
+
+    // Parse the cloned response.
+    clonedResponse.json().then((data) => {
+        // If the response meets the criteria.
+        if (data && data.success && data.response === "stop") {
+            // Get the origin of the response.
+            const origin = new URL(clonedResponse.url).origin;
+
+            // Send a request to the `API` to stop the session.
+            fetch(`${origin}/api/action`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "action": "stop"
+                })
+            // Process the stop response.
+            }).then((actionResponse) => {
+                if (!actionResponse.ok) {
+                    // Log the error.
+                    console.error(`Error with action response from '${actionResponse.url}'. Status: ${actionResponse.status}`);
+
+                    // Return the stop response as is.
+                    return actionResponse;
+                }
+
+                // Since the response is okay, parse it.
+                actionResponse.json().then((stopData) => {
+                    // If the response meets the criteria.
+                    if (stopData.status === "success" && stopData.url) {
+                        // Change the location to the redirect location.
+                        window.location.href = stopData.url;
+
+                    // Otherwise
+                    } else {
+                        // Log the error.
+                        console.error("The response for the 'stop' action does not match to expected format.");
+                    }
+                });
+            });
+        }
+    });
+
+    // Return the original response.
+    return response;
+});
