@@ -1,6 +1,6 @@
 # Changelog
 
-## Boterview 1.0.1
+## boterview 1.0.1
 
 ### Changed
 - Update build artifacts to exclude unnecessary `assets/` directory.
@@ -8,7 +8,7 @@
 - Remove the `CC` license images from the `README.md` file do to rendering
   issues on `PyPI`.
 
-## Boterview 1.0.0
+## boterview 1.0.0
 
 ### Added
 - Add service classes (i.e., `Boterview`, `Study`, `Counter`, `Prompt`,
