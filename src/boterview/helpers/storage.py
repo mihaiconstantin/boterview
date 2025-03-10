@@ -63,3 +63,26 @@ def count_participants(participants: List[ParticipantModel], condition_name: str
 
     # Return the count.
     return count
+
+
+# Count how many conversations the study had.
+def count_conversations(conversations: List[ConversationModel], condition_name: str | None = None) -> int:
+    # Define the count.
+    count: int
+
+    # If the condition is not provided, get the total count.
+    if not condition_name:
+        # Count.
+        count = len(conversations)
+
+    # Otherwise, count the conversations based on the condition.
+    else:
+        # Count.
+        count = len([
+            conversation for
+            conversation in conversations if
+            conversation.participant.condition == condition_name
+        ])
+
+    # Return the count.
+    return count
