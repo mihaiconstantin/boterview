@@ -169,3 +169,10 @@ async def on_message(message: chainlit.Message):
 
     # Send the message.
     await response.update()
+
+
+# On interview termination notice (i.e., either user or bot triggered).
+@chainlit.action_callback("on_stop")
+def on_stop(action: chainlit.Action):
+    # Return.
+    return "stop"
