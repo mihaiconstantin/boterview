@@ -1,4 +1,5 @@
 # Imports.
+from typing import Dict, List
 from datetime import datetime, timezone
 import chainlit
 from boterview.services.configuration.configuration import Configuration
@@ -42,3 +43,20 @@ def stop_payload(user_code: str, message: str) -> Dict:
         "stopped_at": datetime.now(timezone.utc).isoformat(),
         "message": message
     }
+
+
+# Get the message history in the `chainlit` session.
+def get_message_history() -> List[Dict[str, str]]:
+    # Attempt to get the `chainlit` message history.
+    message_history: List[Dict[str, str]] | None = chainlit.user_session.get("message_history")
+
+    # If the message history is not present.
+    if message_history is None:
+        # Set the message history to an empty list.
+        message_history = []
+
+        # Initialize the session message history to an empty list.
+        chainlit.user_session.set("message_history", message_history)
+
+    # Return the message history.
+    return message_history
