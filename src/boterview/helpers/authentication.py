@@ -37,3 +37,22 @@ def create_jwt(code: str, secret: str) -> str:
 
     # Return the encoded JWT.
     return encoded_jwt
+
+
+# Decode the JWT from the participation code.
+def decode_jwt(token: str, secret) -> str:
+    # If the secret is not provided.
+    if not secret:
+        # Raise.
+        raise ValueError(f"Invalid secret \"{ secret }\" provided for JWT decoding.")
+
+    # Decode the JWT.
+    decoded_jwt: Dict[str, str] = jwt.decode(
+        jwt = token,
+        key = secret,
+        algorithms = ["HS256"],
+        options = {"verify_signature": True}
+    )
+
+    # Return the code.
+    return decoded_jwt["code"]
