@@ -108,3 +108,64 @@ async def on_start():
 
     # Send the message.
     await response.update()
+
+
+# On chat message.
+@chainlit.on_message
+async def on_message(message: chainlit.Message):
+    # Get the user from the session.
+    user: chainlit.User | None = chainlit.user_session.get("user")
+
+    # If the user is not present, return.
+    if not user:
+        return
+
+    # Get the participant object.
+    participant: Participant | None = boterview.study.get_participant(user.identifier)
+
+    # If the participant is not found, return.
+    if not participant:
+        return
+
+    # Get the participant model.
+    participant_model: ParticipantModel = storage.get_participant(participant.code)
+
+    # Get the message history.
+    message_history: List[Dict[str, str]] = chat.get_message_history()
+
+    # Append the user's message to the history.
+    message_history.append({"role": "user", "content": message.content})
+
+    # Save the conversation to the database.
+    storage.save_conversation(participant_model, "participant", message.content)
+
+    # If the user's message contains the stop command.
+    if chat.should_stop_chatting(message.content, participant.code):
+        # Send a stop message.
+        return await chat.send_stop_message(
+            content = configuration.data["chat"]["stop_response_user_triggered"],
+            payload = chat.stop_payload(participant.code, message.content)
+        )
+
+    # Get the bot response.
+    response = await get_bot_response(message_history)
+
+    # Append the bot's response to the history.
+    message_history.append({"role": "assistant", "content": response.content})
+
+    # Save the conversation to the database.
+    storage.save_conversation(participant_model, "bot", response.content)
+
+    # If the bot's message contains the stop command.
+    if chat.should_stop_chatting(response.content, participant.code):
+        # Remove the last response from the UI.
+        await response.remove()
+
+        # Send a stop message.
+        return await chat.send_stop_message(
+            content = configuration.data["chat"]["stop_response_bot_triggered"],
+            payload = chat.stop_payload(participant.code, message.content)
+        )
+
+    # Send the message.
+    await response.update()
