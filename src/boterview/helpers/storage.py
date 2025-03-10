@@ -115,3 +115,20 @@ def calculate_duration(participants: List[ParticipantModel], condition_name: str
 
     # Return.
     return total_duration
+
+
+# Calculate the duration for a single participant.
+def calculate_participant_duration(participant: ParticipantModel) -> int:
+    # Default duration.
+    duration: int = 0
+
+    # If both the start and the end times are set.
+    if participant.start_time and participant.end_time:
+        # Calculate the duration.
+        duration = (participant.end_time - participant.start_time).seconds
+
+        # Return the duration.
+        return duration
+
+    # Return the default duration.
+    return duration
