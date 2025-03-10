@@ -132,3 +132,20 @@ def calculate_participant_duration(participant: ParticipantModel) -> int:
 
     # Return the default duration.
     return duration
+
+
+# Get the list of conversations for a participant as text.
+def get_participant_conversations(participant: ParticipantModel) -> str:
+    # Get the list of conversations for the participant.
+    conversations: List[ConversationModel] = participant.conversations.order_by(ConversationModel.timestamp) # type: ignore
+
+    # Prepare the output.
+    output: str = ""
+
+    # For each conversation.
+    for conversation in conversations:
+        # Format the conversation.
+        output += f"[{conversation.timestamp}] {conversation.message_type.capitalize()}: {conversation.message}" + "\n" # type: ignore
+
+    # Return the conversation text.
+    return output
