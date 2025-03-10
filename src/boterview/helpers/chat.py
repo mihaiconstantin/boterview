@@ -1,5 +1,5 @@
 # Imports.
-from typing import Dict
+from datetime import datetime, timezone
 import chainlit
 from boterview.services.configuration.configuration import Configuration
 
@@ -33,3 +33,12 @@ async def send_stop_message(content: str,  callback: str = "on_stop", payload: D
             )
         ]
     ).send()
+
+
+# Define the termination payload.
+def stop_payload(user_code: str, message: str) -> Dict:
+    return {
+        "user": user_code,
+        "stopped_at": datetime.now(timezone.utc).isoformat(),
+        "message": message
+    }
