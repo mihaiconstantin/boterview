@@ -86,3 +86,32 @@ def count_conversations(conversations: List[ConversationModel], condition_name: 
 
     # Return the count.
     return count
+
+
+# Calculate the total duration of the study.
+def calculate_duration(participants: List[ParticipantModel], condition_name: str | None = None) -> int:
+    # Define the total duration.
+    total_duration: int = 0
+
+    # If the condition is not provided, calculate the total duration.
+    if not condition_name:
+        # Calculate the total duration.
+        for participant in participants:
+            # If both the start and the end times are set.
+            if participant.start_time and participant.end_time:
+                # Calculate the duration.
+                total_duration += (participant.end_time - participant.start_time).seconds
+
+    # Otherwise, calculate the duration for the given condition.
+    else:
+        # Calculate the total duration for the condition.
+        for participant in participants:
+            # If the condition matches.
+            if participant.condition == condition_name:
+                # If both the start and the end times are set.
+                if participant.start_time and participant.end_time:
+                    # Calculate the duration.
+                    total_duration += (participant.end_time - participant.start_time).seconds
+
+    # Return.
+    return total_duration
