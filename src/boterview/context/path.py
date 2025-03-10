@@ -29,3 +29,21 @@ def initialize_package_paths() -> None:
     else:
         # Compute the root using the resources module.
         _PACKAGE_ROOT = _PACKAGE_SOURCE
+
+
+# Get package source directory.
+def get_package_source() -> pathlib.Path:
+    """Get the package source directory."""
+
+    # Ensure the package source is initialized.
+    if _PACKAGE_SOURCE is None:
+        # Initialize the package paths.
+        initialize_package_paths()
+
+    # Assert the package source is not `None`.
+    assert _PACKAGE_SOURCE is not None, "Package source directory not initialized."
+
+    # Return the package source directory.
+    return _PACKAGE_SOURCE
+
+
