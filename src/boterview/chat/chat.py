@@ -176,3 +176,9 @@ async def on_message(message: chainlit.Message):
 def on_stop(action: chainlit.Action):
     # Return.
     return "stop"
+
+
+# On chat end (i.e., when the user leaves the `/chat/` endpoint).
+@chainlit.on_chat_end
+def on_end():
+    ...
