@@ -1,8 +1,13 @@
 # Imports.
 from typing import List
+from datetime import datetime, timezone
+from boterview.services.boterview.boterview import Boterview
 from boterview.services.boterview.participant import Participant
 from boterview.models.database.participant import Participant as ParticipantModel
 from boterview.models.database.conversation import Conversation as ConversationModel
+
+# Helpers.
+import boterview.helpers.utils as utils
 
 
 # Get the participant from the database by code.
@@ -149,3 +154,112 @@ def get_participant_conversations(participant: ParticipantModel) -> str:
 
     # Return the conversation text.
     return output
+
+
+# Parse the `sqlite` database as a `markdown` string.
+def parse_database(boterview: Boterview) -> str:
+    # Get the current timestamp with timezone information.
+    timestamp: str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S %Z")
+
+    # Get the study name.
+    study_name: str | None = boterview.study.name
+
+    # If the study name is not set, use a default name.
+    if not study_name:
+        # Set a default study name.
+        study_name = "Interview Study"
+
+    # Extract all participants from the database.
+    participants: List[ParticipantModel] = ParticipantModel.select()
+
+    # Extract all conversations from the database.
+    conversations: List[ConversationModel] = ConversationModel.select()
+
+    # Define commonly used strings.
+    new_line: str = "\n"
+    empty_line: str = "\n\n"
+
+    # Prepare the markdown content.
+    markdown: str = "# Study Output" + empty_line
+
+    markdown += f"This output was generated at {timestamp}." + empty_line
+
+    # Add the study information section.
+    markdown += "## Study Information" + empty_line
+    markdown += f"- study name: {study_name}" + new_line
+    markdown += f"- conditions: {len(boterview.study.conditions)}" + new_line
+    markdown += f"- participants: {count_participants(participants)}" + new_line
+    markdown += f"- conversations: {count_conversations(conversations)}" + new_line
+    markdown += f"- duration: {calculate_duration(participants)} seconds" + empty_line
+
+    # Add the conditions section.
+    markdown += "## Conditions" + empty_line
+
+    # For each condition in the study.
+    for condition in boterview.study.conditions.values():
+
+        # Add the condition information.
+        markdown += f"### {condition.name}" + new_line
+        markdown += f"- participants: {count_participants(participants, condition.name)}" + new_line
+        markdown += f"- conversations: {count_conversations(conversations, condition.name)}" + new_line
+        markdown += f"- duration: {calculate_duration(participants, condition.name)} seconds" + empty_line
+
+        # Add the prompt section.
+        markdown += "#### Prompt" + empty_line
+        markdown += utils.markdown_code_block(condition.prompt.to_text()) + empty_line
+
+        # Add the interview document section.
+        markdown += "#### Interview Document" + empty_line
+        markdown += utils.markdown_code_block(condition.interview.to_text().strip()) + empty_line
+
+        # Add the participants section.
+        markdown += "#### Participants" + empty_line
+
+        # For each participant in the condition.
+        for participant in participants:
+
+            # If the participant is in the condition.
+            if participant.condition == condition.name:
+
+                # Add the participant heading.
+                markdown += f"##### Participant - {participant.code}" + empty_line
+
+                # Add the participant information.
+                markdown += "###### Information" + empty_line
+                markdown += f"- id: {participant.id}" + new_line # type: ignore
+                markdown += f"- code: {participant.code}" + new_line
+                markdown += f"- consent: {participant.consent}" + new_line
+                markdown += f"- start time: {participant.start_time}" + new_line
+                markdown += f"- end time: {participant.end_time}" + new_line
+                markdown += f"- duration: {calculate_participant_duration(participant)} seconds" + empty_line
+
+                # Add the conversation section.
+                markdown += "###### Conversation" + empty_line
+                markdown += utils.markdown_code_block(get_participant_conversations(participant)) + empty_line
+
+    # Add the participants without consent (i.e., unassigned participants).
+    markdown += "## Unassigned Participants" + empty_line
+
+    # Extract the unassigned participants.
+    participants_unassigned: List[ParticipantModel] = [participant for participant in participants if not participant.consent]
+
+    # Add the number of unassigned participants.
+    markdown += f"- participants: {len(participants_unassigned)}" + empty_line
+
+    # For each participant in the database.
+    for participant in participants_unassigned:
+
+        # Add the participant heading.
+        markdown += f"### Participant - {participant.code}" + empty_line
+
+        # Add the participant information.
+        markdown += "#### Information" + empty_line
+        markdown += f"- id: {participant.id}" + new_line # type: ignore
+        markdown += f"- code: {participant.code}" + new_line
+        markdown += f"- consent: {participant.consent}" + new_line
+        markdown += f"- start time: {participant.start_time}" + new_line
+        markdown += f"- end time: {participant.end_time}" + new_line
+        markdown += f"- duration: {calculate_participant_duration(participant)} seconds" + empty_line
+
+    # Return the markdown.
+    return markdown
