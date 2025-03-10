@@ -1,0 +1,40 @@
+/* Hide the new chat button. */
+#new-chat-button {
+    display: none !important;
+}
+
+/* Hide the logo. */
+.logo {
+    display: none !important;
+}
+
+/* Hide the theme toggle. */
+#theme-toggle {
+    display: none !important;
+}
+
+/* Hide the user profile button. */
+#radix-\:r9\:{
+    display: none !important;
+}
+
+/* Hide the footer branding. */
+.watermark {
+    visibility: hidden !important;
+}
+
+/* Hide the LLM answer copy button. */
+button:has(svg.lucide-copy) {
+    display: none !important;
+}
+
+/* Hide the LLM answer copy button. */
+button:has(svg.lucide-power) {
+    background-color: #D97D5A;
+    color: white;
+
+    &:hover {
+        background-color: #d97e5acc;
+        color: white;
+    }
+}
