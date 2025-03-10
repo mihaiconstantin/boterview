@@ -1,4 +1,5 @@
 # Imports.
+from typing import List
 from boterview.services.boterview.participant import Participant
 from boterview.models.database.participant import Participant as ParticipantModel
 from boterview.models.database.conversation import Conversation as ConversationModel
@@ -39,3 +40,26 @@ def save_conversation(participant_model: ParticipantModel, message_type: str, me
 
     # Return the created conversation record.
     return conversation_model
+
+
+# Count how many participants the study had.
+def count_participants(participants: List[ParticipantModel], condition_name: str | None = None) -> int:
+    # Define the count.
+    count: int
+
+    # If the condition is not provided, get the total count.
+    if not condition_name:
+        # Count.
+        count = len(participants)
+
+    # Otherwise, count the participants based on the condition.
+    else:
+        # Count
+        count = len([
+            participant for
+            participant in participants if
+            participant.condition == condition_name
+        ])
+
+    # Return the count.
+    return count
