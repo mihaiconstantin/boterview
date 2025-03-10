@@ -47,3 +47,17 @@ def get_package_source() -> pathlib.Path:
     return _PACKAGE_SOURCE
 
 
+# Get the package root directory.
+def get_package_root() -> pathlib.Path:
+    """Get the package root directory."""
+
+    # Ensure the package root is initialized.
+    if _PACKAGE_ROOT is None:
+        # Initialize the package paths.
+        initialize_package_paths()
+
+    # Assert the package root is not `None`.
+    assert _PACKAGE_ROOT is not None, "Package root directory not initialized."
+
+    # Return the package root directory.
+    return _PACKAGE_ROOT
