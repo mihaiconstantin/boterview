@@ -1,6 +1,7 @@
 # Imports.
-from typing import Dict, List
+from typing import Callable, Dict, List
 from datetime import datetime, timezone
+import openai
 import chainlit
 from boterview.services.configuration.configuration import Configuration
 
@@ -60,3 +61,27 @@ def get_message_history() -> List[Dict[str, str]]:
 
     # Return the message history.
     return message_history
+
+
+# Get a message from the LLM.
+def get_bot_response_setup(client: openai.AsyncOpenAI, client_settings: Dict[str, str]) -> Callable:
+    # Define the get bot response function.
+    async def get_bot_response(message_history: List[Dict[str, str]], author: str = "Interviewer") -> chainlit.Message:
+        # Create a message object for the bot response.
+        response: chainlit.Message = chainlit.Message(content = "", author = author)
+
+        # Get the stream.
+        stream = await client.chat.completions.create(messages = message_history, stream = True, **client_settings) # type: ignore
+
+        # For each part in the stream.
+        async for part in stream:
+            # If the part has a message.
+            if token := part.choices[0].delta.content or "":
+                # Wait for the response.
+                await response.stream_token(token)
+
+        # Return the response.
+        return response
+
+    # Return the function.
+    return get_bot_response
