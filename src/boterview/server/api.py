@@ -1,8 +1,13 @@
 # Imports.
 from typing import Dict, List
-from fastapi import APIRouter, Request, status
+from fastapi import APIRouter, Request, Response, status
 from fastapi.responses import JSONResponse
+from boterview.models.api.code import CodePayload
+from boterview.services.boterview.boterview import Boterview
 from boterview.services.ui.ui import UI
+
+# Import database models.
+from boterview.models.database.participant import Participant as ParticipantModel
 
 # Import helpers.
 import boterview.helpers.authentication as authentication
@@ -52,3 +57,45 @@ async def ui(key: str, request: Request) -> JSONResponse:
         content = {"status": "success", "data": data},
         status_code = status.HTTP_200_OK
     )
+
+
+# Define a participant code verification API endpoint.
+@router.post("/verify")
+async def verify(payload: CodePayload) -> JSONResponse:
+    # Strip the code of any whitespace.
+    code = payload.code.strip()
+
+    # Get the current `boterview` instance.
+    boterview: Boterview = app.get_boterview()
+
+    # Check the code against the allowed list of codes.
+    code_is_valid = boterview.validate_code(code)
+
+    # If the code is not valid.
+    if not code_is_valid:
+        return JSONResponse(
+            content = {"status": "error", "message": "Invalid participation code."},
+            status_code = status.HTTP_401_UNAUTHORIZED
+        )
+
+    # Create a new participant model.
+    ParticipantModel.create(code = code)
+
+    # Prepare the response.
+    response: Response = JSONResponse(
+        content = {"status": "success", "message": "Valid participation code."},
+        status_code = status.HTTP_200_OK
+    )
+
+    # Create a JWT token from the code.
+    token: str = authentication.create_jwt(code)
+
+    # Attach token as a cookie to the response.
+    response.set_cookie(
+        key = "code",
+        value = token,
+        httponly = True
+    )
+
+    # Return the response.
+    return response
