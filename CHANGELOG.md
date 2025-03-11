@@ -1,8 +1,22 @@
 # Changelog
 
+## boterview 1.0.3
+
+### Added
+- Add `markdown` support in `PageContent` component. When the UI content is not
+  provided as `HTML`, the component will render the content as `markdown`
+  paragraphs, with support for various formatting options. The processing is
+  done using the `react-markdown` library.
+
+### Changed
+- Update default UI content to feature `markdown` formatting for the
+  introduction and consent pages.
+- Update default system prompt to ensure the LLM does not copy the interview
+  document to the chat.
+
 ## boterview 1.0.2
 
-## Changed
+### Changed
 - Update badges in `README.md`.
 - Update heading capitalization in `CHANGELOG.md`.
 

@@ -5,7 +5,7 @@
 name = "boterview"
 
 # Package version.
-version = "1.0.2"
+version = "1.0.3"
 
 # Package description.
 description = "Effortlessly conduct chatbot-based interviews with customizable protocols and randomized condition assignments, tailored for social science research."
