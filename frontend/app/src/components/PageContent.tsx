@@ -1,5 +1,6 @@
 // Imports.
 import React from "react";
+import Markdown from "react-markdown";
 import useInjectTermination from "../hooks/useInjectTermination";
 import sanitizeHtml from "../helpers/sanitizeHtml";
 import UIContent from "../types/UIContent";
@@ -34,7 +35,9 @@ const PageContent: React.FC<UIContent> = ({ heading, content, metadata }) => {
                             // For each string in the content array.
                             (content as string[]).map((paragraph, index) => (
                                 // Render a paragraph.
-                                <p key={index}>{injectTermination(paragraph)}</p>
+                                <Markdown key={index}>
+                                    {injectTermination(paragraph)}
+                                </Markdown>
                             ))
                         }
                     </div>
