@@ -181,18 +181,9 @@ async def action(request: Request) -> JSONResponse:
 
     # If the action is `stop`.
     if action == "stop":
-        # If the application was started in headless mode.
-        if request.app.state.headless:
-            # Use the frontend origin.
-            origin: str = request.app.state.origins["frontend"]
-        # Otherwise.
-        else:
-            # Use the backend origin.
-            origin: str = request.app.state.origins["backend"]
-
-        # Return a redirect response.
+        # Return a redirect response to the client `/stop` endpoint.
         return JSONResponse(
-            content = {"status": "success", "url": origin + "/stop"},
+            content = {"status": "success", "url": "/stop"},
             status_code = status.HTTP_200_OK
         )
 
