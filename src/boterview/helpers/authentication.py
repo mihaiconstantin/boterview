@@ -12,7 +12,7 @@ import boterview.context.app as app
 # Parse the cookie header as a dictionary.
 def parse_cookie(cookie: str) -> Dict[str, str]:
     # Create a dictionary from the header cookie.
-    cookies: Dict[str, str] = dict(part.split("=") for part in cookie.split(";"))
+    cookies: Dict[str, str] = dict(part.strip().split("=") for part in cookie.split(";"))
 
     # Return the cookies.
     return cookies
