@@ -87,7 +87,7 @@ interceptRequest("/chat/project/action", "POST", (response) => {
                     // If the response meets the criteria.
                     if (stopData.status === "success" && stopData.url) {
                         // Change the location to the redirect location.
-                        window.location.href = stopData.url;
+                        window.location.replace(stopData.url);
 
                     // Otherwise
                     } else {
