@@ -30,6 +30,9 @@ auto_tag_thread = true
 # Allow users to edit their own messages.
 edit_message = false
 
+# Autoscroll new user messages at the top of the window
+user_message_autoscroll = false
+
 # Authorize users to spontaneously upload files with messages.
 [features.spontaneous_file_upload]
     enabled = false
