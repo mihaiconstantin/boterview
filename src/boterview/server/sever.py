@@ -1,4 +1,5 @@
 # Imports.
+from typing import List
 import os
 import pathlib
 from fastapi import FastAPI
@@ -112,6 +113,19 @@ def mount_chat(server: FastAPI):
         app = server,
         target = str(PACKAGE_SOURCE / "chat" / "chat.py"),
         path = "/chat/"
+    )
+
+
+# Add `CORS` middleware.
+def add_cors_middleware(server: FastAPI, origins: List[str]):
+    # Add CORS middleware to the server.
+    server.add_middleware(
+        CORSMiddleware,
+        allow_origins = origins,
+        allow_credentials = True,
+        allow_methods = ["*"],
+        allow_headers = ["*"],
+        expose_headers = ["Content-Disposition"]
     )
 
 
