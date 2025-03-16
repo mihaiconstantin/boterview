@@ -88,7 +88,7 @@ async def on_start():
     # Save the participant record.
     participant_model.save()
 
-    # Get the message history.
+    # Get the message history. It will always be empty at the start of the chat.
     message_history: List[Dict[str, str]] = chat.get_message_history()
 
     # Set the system prompt in the session.
