@@ -18,12 +18,15 @@ export default defineConfig(({ mode }) => {
         ],
 
         // Configure the development server.
-        server: {
+        server: mode === "development" ? {
             // Frontend development server port.
-            port: 5173,
+            port:  5173,
 
-            // Proxy.
-            proxy: mode == "development" ? {
+            // Allow all hosts in development mode.
+            allowedHosts: true,
+
+            // Setup reverse proxies.
+            proxy: {
                 '/api': {
                     target: env.BOTERVIEW_BACKEND_URL,
                     changeOrigin: true,
@@ -35,7 +38,7 @@ export default defineConfig(({ mode }) => {
                     secure: false,
                     ws: true
                 }
-            } : undefined
-        }
+            }
+        } : undefined
     }
 });

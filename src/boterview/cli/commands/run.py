@@ -14,11 +14,11 @@ import boterview.context.app as app
 # Command to run a `boterview` study.
 @click.command(name = "run")
 @click.option("--config", type = str, required = True, help = "The study `.toml` configuration file to use.")
-@click.option("--port", type = int, default = 8080, help = "The port for the application (i.e., defaults to `8080`).")
-@click.option("--port-frontend", type = int, default = 5173, help = "The port for the development frontend application (i.e., defaults to `5173`).")
 @click.option("--database", type = str, default = "boterview.db", help = "The name of the database to use (i.e., defaults to `boterview.db`).")
+@click.option("--host", type = str, default = "localhost", help = "The host for the application (i.e., defaults to `localhost`).")
+@click.option("--port", type = int, default = 8080, help = "The port for the application (i.e., defaults to `8080`).")
 @click.option("--headless", is_flag = True, help = "Run the application in headless mode.")
-def run(config: str, port: int, port_frontend: int, database: str, headless: bool) -> None:
+def run(config: str, database: str, host: str, port: int, headless: bool) -> None:
     """Command to start a study based on a configuration file."""
 
     # Get the current configuration.
@@ -40,12 +40,12 @@ def run(config: str, port: int, port_frontend: int, database: str, headless: boo
     boterview.initialize_study(configuration)
 
     # Create the server instance.
-    server: FastAPI = create_server(port, port_frontend, database, headless)
+    server: FastAPI = create_server(database, headless)
 
     # Start the `FastAPI` server.
     uvicorn.run(
         server,
-        host = "localhost",
+        host = host,
         port = port,
         log_level = "info"
     )

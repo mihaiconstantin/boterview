@@ -1,7 +1,7 @@
 # Imports.
+from typing import List
 import os
 import pathlib
-from typing import Dict
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -116,8 +116,21 @@ def mount_chat(server: FastAPI):
     )
 
 
+# Add `CORS` middleware.
+def add_cors_middleware(server: FastAPI, origins: List[str]):
+    # Add CORS middleware to the server.
+    server.add_middleware(
+        CORSMiddleware,
+        allow_origins = origins,
+        allow_credentials = True,
+        allow_methods = ["*"],
+        allow_headers = ["*"],
+        expose_headers = ["Content-Disposition"]
+    )
+
+
 # Create a server instance.
-def create_server(port_backend: int, port_frontend: int, database: str, headless: bool) -> FastAPI:
+def create_server(database: str, headless: bool) -> FastAPI:
     # Create a lifespan event handler.
     lifespan = create_lifespan(database)
 
@@ -132,36 +145,8 @@ def create_server(port_backend: int, port_frontend: int, database: str, headless
         openapi_url = None
     )
 
-    # Define the allowed origins.
-    origins: Dict[str, str] = {
-        # Frontend development server.
-        "frontend": f"http://localhost:{ port_frontend }",
-
-        # Production server.
-        "backend": f"http://localhost:{ port_backend }"
-    }
-
     # Store the headless flag on the state.
     server.state.headless = headless
-
-    # Store the origins on the state.
-    server.state.origins = {
-        "frontend": origins["frontend"],
-        "backend": origins["backend"]
-    }
-
-    # Add CORS middleware to the server.
-    server.add_middleware(
-        CORSMiddleware,
-        allow_origins = [
-            origins["frontend"],
-            origins["backend"]
-        ],
-        allow_credentials = True,
-        allow_methods = ["*"],
-        allow_headers = ["*"],
-        expose_headers = ["Content-Disposition"]
-    )
 
     # Mount the chat application.
     mount_chat(server)
