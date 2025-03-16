@@ -13,7 +13,7 @@ import Footer from './components/Footer';
 // Main component structuring the application.
 const App = () => {
     return (
-        <main className="min-h-screen flex border-0 border-red-500">
+        <main className="min-h-screen flex select-none border-0 border-red-500">
             <div className="container w-[1024px] mx-auto border-0 border-red-500 p-6">
                 <div className="h-full flex flex-col gap-6 border-0">
 
