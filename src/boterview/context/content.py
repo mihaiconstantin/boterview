@@ -169,23 +169,23 @@ TEMPLATE: Dict[str, Any] = {
                     },
                     "prompt": {
                         "comment": "The file containing the prompt for the condition.",
-                        "value": "prompt.md"
+                        "value": "interview/prompt.md"
                     },
                     "protocol": {
                         "comment": "The file containing the interview protocol for the condition. When `protocol_process` is set to `True`, each question should be separated by the `protocol_question_separator`. The first line should be the question, and the following lines ar considered question notes.",
-                        "value": "protocol.md"
+                        "value": "interview/protocol.md"
                     },
                     "guide": {
                         "comment": "The file containing the interview guide for the condition. If omitted, it will not be included in the interview document.",
-                        "value": "guide.md"
+                        "value": "interview/guide.md"
                     },
                     "introduction": {
                         "comment": "The file containing the interview introduction for the condition. If omitted, it will not be included in the interview document.",
-                        "value": "introduction.md"
+                        "value": "interview/introduction.md"
                     },
                     "closing": {
                         "comment": "The file containing the interview closing for the condition. If omitted, it will not be included in the interview document.",
-                        "value": "closing.md"
+                        "value": "interview/closing.md"
                     }
                 }
             }
