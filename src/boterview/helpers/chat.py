@@ -5,6 +5,10 @@ import openai
 import chainlit
 from boterview.services.configuration.configuration import Configuration
 
+# Import the database models.
+from boterview.models.database.participant import Participant as ParticipantModel
+from boterview.models.database.conversation import Conversation as ConversationModel
+
 # Import the application context.
 import boterview.context.app as app
 
@@ -61,6 +65,42 @@ def get_message_history() -> List[Dict[str, str]]:
 
     # Return the message history.
     return message_history
+
+
+# Initialize the message history in the `chainlit` session.
+def initialize_message_history(participant: ParticipantModel) -> None:
+    # Get the message history.
+    message_history: List[Dict[str, str]] = get_message_history()
+
+    # If there exists a message history.
+    if message_history:
+        # Return.
+        return
+
+    # Otherwise, set the system prompt in the session.
+    message_history.append({
+        "role": "system",
+        "content": participant.prompt # type: ignore
+    })
+
+    # If the participant has conversations stored.
+    if participant.conversations.exists(): # type: ignore
+        # Get previously stored conversations.
+        conversations: List[ConversationModel] =  participant.conversations.order_by(ConversationModel.timestamp) # type: ignore
+
+        # For each conversation.
+        for conversation in conversations:
+            # Determine the role from the message type.
+            role = "assistant" if conversation.message_type == "bot" else "user"
+
+            # Update the session message history to include the conversation.
+            message_history.append({
+                "role": role,
+                "content": str(conversation.message)
+            })
+
+    # Return (i.e., no need to set to session since dealing with a reference).
+    return
 
 
 # Get a message from the LLM.
