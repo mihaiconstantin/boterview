@@ -1,5 +1,5 @@
 # Imports.
-from typing import Callable, Dict, List
+from typing import Callable, Dict, List, Literal
 from datetime import datetime, timezone
 import openai
 import chainlit
@@ -101,6 +101,63 @@ def initialize_message_history(participant: ParticipantModel) -> None:
 
     # Return (i.e., no need to set to session since dealing with a reference).
     return
+
+
+# Populate the chat interface from the message history.
+async def populate_chat_interface(participant: ParticipantModel) -> None:
+    # Get the message history.
+    message_history: List[Dict[str, str]] = get_message_history()
+
+    # If the history is empty.
+    if not message_history:
+        # Return.
+        return None
+
+    # Define the message types that conform the the `literalai` `MessageStepType` type.
+    types: Dict[str, Literal["assistant_message", "user_message", "system_message"]] = {
+        "assistant": "assistant_message",
+        "user": "user_message",
+        "system": "system_message"
+    }
+
+    # Get the application configuration.
+    configuration: Configuration = app.get_configuration()
+
+    # Otherwise, for each message in the history.
+    for message in message_history:
+        # If the message is a system message.
+        if message["role"] == "system":
+            # Skip.
+            continue
+
+        # Check if the message triggers a stop.
+        stop_triggered = should_stop_chatting(message["content"], participant.code) # type: ignore
+
+        # Always display the user message or any other message not triggering a stop.
+        if message["role"] == "user" or not stop_triggered:
+            # Display the message.
+            await chainlit.Message(
+                content = message["content"],
+                type = types[message["role"]]
+            ).send()
+
+        # However, if the message triggered a stop.
+        if stop_triggered:
+            # And if the assistant is the culprit.
+            if message["role"] == "assistant":
+                # Replace the assistant message with a stop message.
+                await send_stop_message(
+                    content = configuration.data["chat"]["stop_response_bot_triggered"],
+                    payload = stop_payload(participant.code, message["content"]) # type: ignore
+                )
+
+            # Otherwise, respond on behalf oath assistant with a stop message.
+            else:
+                # Send a stop message as a response.
+                await send_stop_message(
+                    content = configuration.data["chat"]["stop_response_user_triggered"],
+                    payload = stop_payload(participant.code, message["content"]) # type: ignore
+                )
 
 
 # Get a message from the LLM.
