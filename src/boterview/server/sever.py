@@ -2,8 +2,8 @@
 from typing import List
 import os
 import pathlib
-from fastapi import FastAPI
-from fastapi.responses import FileResponse
+from fastapi import FastAPI, status
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
@@ -53,39 +53,55 @@ def mount_frontend(server: FastAPI):
     # Include the API router.
     server.include_router(router)
 
-    # If the server is not headless.
-    if not server.state.headless:
-        # Get the package root directory.
-        PACKAGE_ROOT: pathlib.Path = path.get_package_root()
+    # If the server is started in headless mode.
+    if server.state.headless:
+        # Define the index route.
+        @server.get("/")
+        def headless_index():
+            return JSONResponse(
+                content = {
+                    "status": "success",
+                    "message": "The server is running in headless mode."
+                },
+                status_code = status.HTTP_200_OK
+            )
 
-        # Frontend directory.
-        FRONTEND_APP_BUILD: pathlib.Path = PACKAGE_ROOT / "frontend" / "app" / "dist"
+        # Return early.
+        return
 
-        # Check if the frontend build directory exists.
-        if not FRONTEND_APP_BUILD.exists():
-            # Raise an error.
-            raise FileNotFoundError(f"Frontend build directory is missing. Please build the frontend.")
+    # Otherwise, mount the frontend.
 
-        # Mount the frontend build directory.
-        server.mount(
-            path = "/static",
-            app = StaticFiles(directory = FRONTEND_APP_BUILD, html = True),
-            name = "static"
-        )
+    # Get the package root directory.
+    PACKAGE_ROOT: pathlib.Path = path.get_package_root()
 
-        # Catch all for the frontend.
-        @server.get("/{path:path}", include_in_schema = False)
-        def index(path: str):
-            # Get the requested file.
-            requested_file = FRONTEND_APP_BUILD / path
+    # Frontend directory.
+    FRONTEND_APP_BUILD: pathlib.Path = PACKAGE_ROOT / "frontend" / "app" / "dist"
 
-            # If the requested file is a file.
-            if requested_file.is_file():
-                # Serve the requested file.
-                return FileResponse(str(requested_file))
+    # Check if the frontend build directory exists.
+    if not FRONTEND_APP_BUILD.exists():
+        # Raise an error.
+        raise FileNotFoundError(f"Frontend build directory is missing. Please build the frontend.")
 
-            # Otherwise, serve the index file.
-            return FileResponse(FRONTEND_APP_BUILD / "index.html")
+    # Mount the frontend build directory.
+    server.mount(
+        path = "/static",
+        app = StaticFiles(directory = FRONTEND_APP_BUILD, html = True),
+        name = "static"
+    )
+
+    # Catch all for the frontend.
+    @server.get("/{path:path}", include_in_schema = False)
+    def frontend_index(path: str):
+        # Get the requested file.
+        requested_file = FRONTEND_APP_BUILD / path
+
+        # If the requested file is a file.
+        if requested_file.is_file():
+            # Serve the requested file.
+            return FileResponse(str(requested_file))
+
+        # Otherwise, serve the index file.
+        return FileResponse(FRONTEND_APP_BUILD / "index.html")
 
 
 # Mount the chat application.
