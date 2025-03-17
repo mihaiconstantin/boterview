@@ -58,7 +58,8 @@ class Configuration:
             "stop_response_bot_triggered": str | None,
             "stop_response_user_triggered": str | None,
             "stop_button_label": str | None,
-            "initial_message": str | None
+            "initial_message": str | None,
+            "resume_message": str | None
         },
         "study": {
             "name": str | None,
@@ -187,6 +188,7 @@ class Configuration:
         self.data["chat"]["stop_response_user_triggered"] = self.data["chat"]["stop_response_user_triggered"] or self.template.get("chat.stop_response_user_triggered")
         self.data["chat"]["stop_button_label"] = self.data["chat"]["stop_button_label"] or self.template.get("chat.stop_button_label")
         self.data["chat"]["initial_message"] = self.data["chat"]["initial_message"] or self.template.get("chat.initial_message")
+        self.data["chat"]["resume_message"] = self.data["chat"]["resume_message"] or self.template.get("chat.resume_message")
 
         # Set default values for the `study` section.
         self.data["study"]["name"] = self.data["study"]["name"] or self.template.get("study.name")
