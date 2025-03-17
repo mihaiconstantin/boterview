@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://boterview.mihaiconstantin.com">
+    <a href="https://boterview.dev">
         <img width="180px" src="https://raw.githubusercontent.com/mihaiconstantin/boterview/refs/heads/main/frontend/app/src/assets/images/boterview-logo.png" alt="boterview logo"/>
     </a>
 </p>
@@ -118,7 +118,7 @@ commands below assume you have already installed the package.
 boterview generate study --path . --quantity 100 --config study.toml --secret
 
 # Preview the default condition setup.
-boterview preview --config study.toml --condition "A Condition Name"
+boterview preview --config study.toml --condition "Condition 1"
 
 # Run the study and save the data in the `boterview.db` database file.
 boterview run --config study.toml --database boterview.db
@@ -159,4 +159,4 @@ the *Contributing* section below for more information on how you can help.
 
 - The package source code in this repository is licensed under the [MIT
   license](https://opensource.org/license/mit).
-- <p class="license-cc" xmlns:cc="https://creativecommons.org/ns#" xmlns:dct="https://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://boterview.mihaiconstantin.com">The documentation and other website materials</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://mihaiconstantin.com">Mihai Constantin</a> are licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0</a>.</p>
+- <p class="license-cc" xmlns:cc="https://creativecommons.org/ns#" xmlns:dct="https://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://boterview.dev">The documentation and other website materials</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://mihaiconstantin.com">Mihai Constantin</a> are licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0</a>.</p>

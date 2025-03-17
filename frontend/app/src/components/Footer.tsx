@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
                     ) : (
                         // Render the default footer.
                         <div>
-                            Made with <span className="heart inline-block cursor-default transition-all duration-500 hover:rotate-[360deg] text-[1.15rem] text-[#c41b1b]">&#9829;</span> by <a className="text-decoration-none text-blue-900" href="https://mihaiconstantin.com" target="_blank"> Mihai Constantin</a> and <a className="text-decoration-none text-blue-900" href="mailto:e.e.c.gielens@tilburguniversity.edu" target="_blank">Erwin Gielens</a>.
+                            Made with <span className="heart inline-block cursor-default transition-all duration-500 hover:rotate-[360deg] text-[1.15rem] text-[#c41b1b]">&#9829;</span> by <a className="text-decoration-none text-blue-900" href="https://mihaiconstantin.com" target="_blank"> Mihai Constantin</a> and <a className="text-decoration-none text-blue-900" href="mailto:e.e.c.gielens@tilburguniversity.edu" target="_blank">Erwin Gielens</a>
                         </div>
                     )
                 )

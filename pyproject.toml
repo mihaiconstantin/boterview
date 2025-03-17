@@ -81,7 +81,7 @@ boterview = "boterview.cli.cli:cli"
 
 # Package URLs.
 [project.urls]
-Homepage = "https://boterview.mihaiconstantin.com"
+Homepage = "https://boterview.dev"
 Repository = "https://github.com/mihaiconstantin/boterview"
 Issues = "https://github.com/mihaiconstantin/boterview/issues"
 Changelog = "https://github.com/mihaiconstantin/boterview/blob/main/CHANGELOG.md"

@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://boterview.mihaiconstantin.com">
+    <a href="https://boterview.dev">
         <img width="180px" src="src/assets/images/boterview-logo.png" alt="boterview logo"/>
     </a>
 </p>
@@ -9,7 +9,7 @@
 </h1>
 
 This `README.md` file pertains the application frontend for the
-[`boterview`](https://boterview.mihaiconstantin.com) tool. A bundled version of
+[`boterview`](https://boterview.dev) tool. A bundled version of
 this frontend is included in the `python` package, which you can install from
 the `PyPI` repository using the following command:
 
@@ -19,7 +19,7 @@ pip install boterview
 ```
 
 For more information on what `boterview` is and how to use it, please refer to
-the [documentation](https://boterview.mihaiconstantin.com).
+the [documentation](https://boterview.dev).
 
 ## Description
 
@@ -51,7 +51,7 @@ boterview run --config <path-to-config-file> --headless
 ```
 
 **_Note._** Please refer to the
-[documentation](https://boterview.mihaiconstantin.com) for more information on
+[documentation](https://boterview.dev) for more information on
 how to scaffold a study and quickly get started.
 
 The `--headless` flag is used to decide whether to mount the frontend
@@ -84,7 +84,7 @@ pnpm run build
 In most cases you do not need to build the frontend application yourself. The
 frontend is bundled with the `boterview` package and served by the backend
 server. Please refer to the
-[documentation](https://boterview.mihaiconstantin.com) for more information on
+[documentation](https://boterview.dev) for more information on
 how to package and deploy the `boterview` application.
 
 ## License
