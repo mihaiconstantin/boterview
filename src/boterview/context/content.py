@@ -121,6 +121,10 @@ TEMPLATE: Dict[str, Any] = {
                 "comment": "The initial message to display when the chat is initiated. This message is not sent to the bot or included in the conversation history.",
                 "value": "The interview will being momentarily."
             },
+            "resume_message": {
+                "comment": "The resume message to display when the chat is resumed after an interruption (e.g., a user page refresh). This message is not sent to the bot or included in the conversation history.",
+                "value": "_The interview will being momentarily._"
+            },
             "stop_response_bot_triggered": {
                 "comment": "The message to display when the bot triggers the stop of the interview.",
                 "value": "Thank you for your participation. The interview is now over. Please proceed by clicking the button below to end the current session."

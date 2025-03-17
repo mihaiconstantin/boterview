@@ -109,8 +109,16 @@ class Boterview:
 
     # Assign a participant to a study condition.
     def assign_participant(self: "Boterview", code: str) -> None:
-        # Create a new participant.
-        participant: Participant = Participant(code)
+        # Get the participant.
+        participant: Participant | None = self.study.get_participant(code)
+
+        # If the participant is already assigned.
+        if participant is not None:
+            # Return.
+            return None
+
+        # Otherwise, create a new participant.
+        participant = Participant(code)
 
         # Assign the participant to a condition.
         self.study.assign_participant(participant)

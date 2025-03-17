@@ -88,14 +88,42 @@ async def on_start():
     # Save the participant record.
     participant_model.save()
 
-    # Get the message history.
+    # Get the stored message history from the database with the system prompt.
+    chat.initialize_message_history(participant_model)
+
+    # Populate the chat interface with any previous messages.
+    await chat.populate_chat_interface(participant_model)
+
+    # Get the possibly restored session message history.
     message_history: List[Dict[str, str]] = chat.get_message_history()
 
-    # Set the system prompt in the session.
-    message_history.append({"role": "system", "content": participant.prompt})
+    # Get the last message role.
+    last_message: Dict[str, str] = message_history[-1]
 
-    # Send an initial message.
-    await chainlit.Message(content = configuration.data["chat"]["initial_message"]).send()
+    # Get the last role from the last message.
+    last_role: str = last_message["role"]
+
+    # If the last message was from the bot (i.e., assistant).
+    if last_role == "assistant":
+        # The wait for the user's response.
+        return
+
+    # If the last message was not the system prompt.
+    if last_role != "system":
+        # If the last message contained the stop command.
+        if chat.should_stop_chatting(last_message["content"], participant.code):
+            # The wait for the user's reaction before anything else.
+            return
+
+    # Otherwise, if the last message is the system prompt.
+    if last_role == "system":
+        # Send an initial message.
+        await chainlit.Message(content = configuration.data["chat"]["initial_message"]).send()
+
+    # Otherwise, if the last message was from the user.
+    elif last_role == "user":
+        # Send a resume message.
+        await chainlit.Message(content = configuration.data["chat"]["resume_message"]).send()
 
     # Get the bot response.
     response = await get_bot_response(message_history)
