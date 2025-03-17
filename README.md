@@ -118,7 +118,7 @@ commands below assume you have already installed the package.
 boterview generate study --path . --quantity 100 --config study.toml --secret
 
 # Preview the default condition setup.
-boterview preview --config study.toml --condition "A Condition Name"
+boterview preview --config study.toml --condition "Condition 1"
 
 # Run the study and save the data in the `boterview.db` database file.
 boterview run --config study.toml --database boterview.db
