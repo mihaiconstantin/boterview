@@ -119,7 +119,7 @@ TEMPLATE: Dict[str, Any] = {
         "value": {
             "initial_message": {
                 "comment": "The initial message to display when the chat is initiated. This message is not sent to the bot or included in the conversation history.",
-                "value": "The interview will being momentarily."
+                "value": "_The interview will being momentarily._"
             },
             "resume_message": {
                 "comment": "The resume message to display when the chat is resumed after an interruption (e.g., a user page refresh). This message is not sent to the bot or included in the conversation history.",
