@@ -123,7 +123,7 @@ TEMPLATE: Dict[str, Any] = {
             },
             "resume_message": {
                 "comment": "The resume message to display when the chat is resumed after an interruption (e.g., a user page refresh). This message is not sent to the bot or included in the conversation history.",
-                "value": "_The interview will being momentarily._"
+                "value": "_The interview will resume momentarily._"
             },
             "stop_response_bot_triggered": {
                 "comment": "The message to display when the bot triggers the stop of the interview.",
