@@ -165,7 +165,7 @@ TEMPLATE: Dict[str, Any] = {
                 "value": {
                     "name": {
                         "comment": "The name of the condition.",
-                        "value": "A Condition Name"
+                        "value": "Condition 1"
                     },
                     "prompt": {
                         "comment": "The file containing the prompt for the condition.",
