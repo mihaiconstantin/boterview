@@ -1,5 +1,36 @@
 # Changelog
 
+## boterview 1.1.0
+
+### Added
+- Add functionality to reconstruct the message history and repopulate the chat
+  interface based on the conversations stored in the database. This feature
+  makes the interview more robust to interruptions (e.g., page reloads). Fixes
+  #24.
+
+### Changed
+- Update default paths in template to `/interface` for UI content files, and
+  `/interview` for interview files.
+- Update `pyproject.toml` to exclude `CNAME` from source distribution build.
+- Disable automatic scrolling to message in the chat window. This behavior was
+  added after a recent update to `chainlit` (i.e., see [this
+  issue](https://github.com/Chainlit/chainlit/issues/1992)).
+- Various improvements to the frontend application.
+
+### Fixed
+- Fix participants getting reassigned to a new condition each time the chat page
+  was reloaded. Closes #24.
+- Fix issue with cookie names not being parsed correctly in Safari due to extra
+  whitespace. Closes #18.
+- Fix issue with hardcoded `localhost` URL. Now, the application can be served
+  from any domain. The recommended way is to serve the static files from the
+  same domain as the backend. However, one can also serve the static files from
+  a different domain, in which case a reverse proxy should be used to prevent
+  any `CORS` issues. In development, the `vite` server for the frontend is
+  configured to proxy requests to the backend (i.e., the backend URL is provided
+  to the frontend server via the `.env.development` file located at
+  `/frontend/app/.env.development`). Closes #17.
+
 ## boterview 1.0.3
 
 ### Added
