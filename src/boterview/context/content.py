@@ -51,7 +51,7 @@ TEMPLATE: Dict[str, Any] = {
                     },
                     "content": {
                         "comment": "The file containing the content for the welcome page. The default is not to use `HTML` and instead each chunk separated by an empty line will be rendered as a paragraph.",
-                        "value": "ui/welcome.md"
+                        "value": "interface/welcome.md"
                     },
                     "html": {
                         "comment": "Whether the content should be treated as `HTML`. Styling via Tailwind `CSS` is supported.",
@@ -68,7 +68,7 @@ TEMPLATE: Dict[str, Any] = {
                     },
                     "content": {
                         "comment": "The file containing the content for the consent page. The default is not to use `HTML` and instead each chunk separated by an empty line will be rendered as a paragraph.",
-                        "value": "ui/consent.md"
+                        "value": "interface/consent.md"
                     },
                     "html": {
                         "comment": "Whether the content should be treated as `HTML`. Styling via Tailwind `CSS` is supported.",
@@ -85,7 +85,7 @@ TEMPLATE: Dict[str, Any] = {
                     },
                     "content": {
                         "comment": "The file containing the content for the stop page. The default is not to use `HTML` and instead each chunk separated by an empty line will be rendered as a paragraph.",
-                        "value": "ui/stop.md"
+                        "value": "interface/stop.md"
                     },
                     "html": {
                         "comment": "Whether the content should be treated as `HTML`. Styling via Tailwind `CSS` is supported.",
@@ -102,7 +102,7 @@ TEMPLATE: Dict[str, Any] = {
                 "value": {
                     "content": {
                         "comment": "The file containing the content for the footer. When not using `HTML`, each chunk separated by an empty line will be rendered as a `div`.",
-                        "value": "ui/footer.md"
+                        "value": "interface/footer.md"
                     },
                     "html": {
                         "comment": "Whether the content should be treated as `HTML`. Styling via Tailwind `CSS` is supported.",
@@ -119,7 +119,7 @@ TEMPLATE: Dict[str, Any] = {
         "value": {
             "initial_message": {
                 "comment": "The initial message to display when the chat is initiated. This message is not sent to the bot or included in the conversation history.",
-                "value": "The interview will being momentarily."
+                "value": "_The interview will being momentarily._"
             },
             "resume_message": {
                 "comment": "The resume message to display when the chat is resumed after an interruption (e.g., a user page refresh). This message is not sent to the bot or included in the conversation history.",
@@ -165,27 +165,27 @@ TEMPLATE: Dict[str, Any] = {
                 "value": {
                     "name": {
                         "comment": "The name of the condition.",
-                        "value": "A Condition Name"
+                        "value": "Condition 1"
                     },
                     "prompt": {
                         "comment": "The file containing the prompt for the condition.",
-                        "value": "prompt.md"
+                        "value": "interview/prompt.md"
                     },
                     "protocol": {
                         "comment": "The file containing the interview protocol for the condition. When `protocol_process` is set to `True`, each question should be separated by the `protocol_question_separator`. The first line should be the question, and the following lines ar considered question notes.",
-                        "value": "protocol.md"
+                        "value": "interview/protocol.md"
                     },
                     "guide": {
                         "comment": "The file containing the interview guide for the condition. If omitted, it will not be included in the interview document.",
-                        "value": "guide.md"
+                        "value": "interview/guide.md"
                     },
                     "introduction": {
                         "comment": "The file containing the interview introduction for the condition. If omitted, it will not be included in the interview document.",
-                        "value": "introduction.md"
+                        "value": "interview/introduction.md"
                     },
                     "closing": {
                         "comment": "The file containing the interview closing for the condition. If omitted, it will not be included in the interview document.",
-                        "value": "closing.md"
+                        "value": "interview/closing.md"
                     }
                 }
             }
