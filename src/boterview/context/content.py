@@ -51,7 +51,7 @@ TEMPLATE: Dict[str, Any] = {
                     },
                     "content": {
                         "comment": "The file containing the content for the welcome page. The default is not to use `HTML` and instead each chunk separated by an empty line will be rendered as a paragraph.",
-                        "value": "ui/welcome.md"
+                        "value": "interface/welcome.md"
                     },
                     "html": {
                         "comment": "Whether the content should be treated as `HTML`. Styling via Tailwind `CSS` is supported.",
@@ -68,7 +68,7 @@ TEMPLATE: Dict[str, Any] = {
                     },
                     "content": {
                         "comment": "The file containing the content for the consent page. The default is not to use `HTML` and instead each chunk separated by an empty line will be rendered as a paragraph.",
-                        "value": "ui/consent.md"
+                        "value": "interface/consent.md"
                     },
                     "html": {
                         "comment": "Whether the content should be treated as `HTML`. Styling via Tailwind `CSS` is supported.",
@@ -85,7 +85,7 @@ TEMPLATE: Dict[str, Any] = {
                     },
                     "content": {
                         "comment": "The file containing the content for the stop page. The default is not to use `HTML` and instead each chunk separated by an empty line will be rendered as a paragraph.",
-                        "value": "ui/stop.md"
+                        "value": "interface/stop.md"
                     },
                     "html": {
                         "comment": "Whether the content should be treated as `HTML`. Styling via Tailwind `CSS` is supported.",
@@ -102,7 +102,7 @@ TEMPLATE: Dict[str, Any] = {
                 "value": {
                     "content": {
                         "comment": "The file containing the content for the footer. When not using `HTML`, each chunk separated by an empty line will be rendered as a `div`.",
-                        "value": "ui/footer.md"
+                        "value": "interface/footer.md"
                     },
                     "html": {
                         "comment": "Whether the content should be treated as `HTML`. Styling via Tailwind `CSS` is supported.",
