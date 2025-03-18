@@ -1,14 +1,15 @@
 // Imports.
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { participantAtom } from "../atoms/participantAtoms";
 import Status from "../types/Status";
 import Endpoint from "../types/Endpoint";
+import Participant from "../types/Participant";
 
 
 // Hook to verify the participant code.
 const useVerifyParticipantCode = () => {
     // Access the participant code setter function.
-    const [participant, setParticipant] = useAtom(participantAtom);
+    const setParticipant = useSetAtom(participantAtom);
 
     // Verify the participant code.
     const verifyParticipantCode = async (code: string): Promise<Status> => {
@@ -38,11 +39,23 @@ const useVerifyParticipantCode = () => {
 
         // If the response is successful, set the participant code.
         if (response.ok && data.status == "success") {
+            // Create the participant object.
+            const participant: Participant = {
+                // Update the participant code.
+                code: code,
+
+                // Update the participant verification status.
+                verified: true,
+
+                // Ensure the participant is not consented.
+                consented: false
+            };
+
             // Update the participant.
-            setParticipant({ ...participant, code: code, verified: true });
+            setParticipant(participant);
 
             // Also store to the local storage.
-            localStorage.setItem("participant", JSON.stringify({ ...participant, code: code, verified: true }));
+            localStorage.setItem("participant", JSON.stringify(participant));
 
             // Return valid verification.
             return Status.accept;
