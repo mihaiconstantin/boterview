@@ -92,7 +92,7 @@ TEMPLATE: Dict[str, Any] = {
                         "value": True
                     },
                     "timeout": {
-                        "comment": "The timeout for the stop page. If omitted, the default timeout will be used.",
+                        "comment": "The timeout for the stop page. Once the timeout elapses, the user will be redirected to welcome page. If the value is `0` or negative, the timeout is disabled and no redirection will occur.",
                         "value": 30
                     }
                 }
