@@ -1,5 +1,25 @@
 # Changelog
 
+## boterview 1.2.0
+
+### Added
+- Add functionality to disable the timeout (i.e., and automatic page reload from
+  the stop page to the welcome page). If the user specifies a timeout of `0`, or
+  a negative value, the timeout will be disabled. This can be useful for studies
+  that require participants to perform additional tasks after the interview.
+  Closes [#30](https://github.com/mihaiconstantin/boterview/issues/30).
+- Add default index route `/` for when the server is started in headless model.
+  This route outputs a `JSON` response indicating that the server is running in
+  headless mode.
+
+### Changed
+- Update `useVerifyParticipantCode` hook to explicit mark any previous consent
+  as invalid upon participant code verification. This change ensures that the
+  participant is required to re-consent if they provide a new code.
+- Remove superfluous period in default footer text.
+- Update `boterview preview` command in `README.md` reflect that the default to
+  scaffolded condition is now named `"Condition 1"`.
+
 ## boterview 1.1.0
 
 ### Added
