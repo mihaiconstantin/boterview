@@ -13,7 +13,6 @@ const useProcessLogout = () => {
     useEffect(() => {
         // Define the fetch data function.
         async function processLogout() {
-
             // Try to issue the logout request.
             try {
                 // Get the response.
