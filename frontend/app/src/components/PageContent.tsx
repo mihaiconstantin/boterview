@@ -13,7 +13,7 @@ const PageContent: React.FC<UIContent> = ({ heading, content, metadata }) => {
 
     // Render the component.
     return (
-        <div className="page-content text-boterview-text">
+        <div className="page-content text-boterview-text border-0">
             {/* Heading. */}
             <h2 className="mx-auto text-center text-4xl font-light tracking-tight border-0">
                 { heading }
