@@ -199,7 +199,7 @@ class Configuration:
         self.data["ui"]["welcome"]["html"] = self.data["ui"]["welcome"]["html"] or self.template.get("ui.welcome.html")
         self.data["ui"]["consent"]["html"] = self.data["ui"]["consent"]["html"] or self.template.get("ui.consent.html")
         self.data["ui"]["stop"]["html"] = self.data["ui"]["stop"]["html"] or self.template.get("ui.stop.html")
-        self.data["ui"]["stop"]["timeout"] = self.data["ui"]["stop"]["timeout"] or self.template.get("ui.stop.timeout")
+        self.data["ui"]["stop"]["timeout"] = self.data["ui"]["stop"]["timeout"] if self.data["ui"]["stop"]["timeout"] is not None else self.template.get("ui.stop.timeout")
 
         # Special case for the `footer` dictionary.
         self.data["ui"]["footer"]["content"] = self.data["ui"]["footer"].get("content", None)

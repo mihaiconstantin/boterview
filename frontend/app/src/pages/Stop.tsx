@@ -15,40 +15,71 @@ const Stop: React.FC = () => {
     // Fetch the stop page data.
     const { data, loading, error } = useFetchContent("stop");
 
-    // Define the counter state.
-    const [counter, setCounter] = useState<number>(10);
+    // Define the timer state.
+    const [timer, setTimer] = useState<number | undefined>(undefined);
+
+    // Define the display timer status state.
+    const [renderTimer, setRenderTimer] = useState<boolean>(false);
+
+    // Get the function for the frontend logout.
+    const invalidateParticipant = useInvalidateParticipant();
 
     // Set the counter from the metadata.
     useEffect(() => {
         // If any data is available.
         if (data?.metadata?.timeout !== undefined) {
+            // Get the timeout value from the metadata.
+            const value: number = data.metadata.timeout as number;
+
             // Set the counter to the value from the metadata.
-            setCounter(data.metadata.timeout as number);
+            setTimer(value);
+
+            // Decide whether the configuration requested to display the timer.
+            setRenderTimer(value > 0);
         }
     }, [data]);
 
-    // Process the backend logout.
+    // Process the backend logout (i.e., remove the cookies).
     useProcessLogout();
 
-    // Get the function for the frontend logout.
-    const invalidateParticipant = useInvalidateParticipant();
+    // Just this once...
+    useEffect(() => {
+        // ...invalidate the participant in the local storage.
+        invalidateParticipant("local");
+    }, [invalidateParticipant]);
+
 
     // Decrement the counter second by second.
     useEffect(() => {
-        // If the counter is greater than zero.
-        if (counter > 0) {
-            // Decrement the counter.
-            const timer: number = setTimeout(() => setCounter(counter - 1), 1000);
+        // If a timer was not requested to be displayed.
+        if (!renderTimer) {
+            // Do nothing.
+            return;
+        }
 
-            // Clear the timer on unmount.
-            return () => clearTimeout(timer);
+        // Otherwise, if the timer value is still being retrieved from the API.
+        if (timer === undefined) {
+            // Do nothing.
+            return;
+        }
+
+        // Finally, if the timer value is available and greater than zero.
+        if (timer > 0) {
+            // Decrement a counter.
+            const counter: number = setTimeout(() => setTimer(timer - 1), 1000);
+
+            // Clear the counter on unmount.
+            return () => clearTimeout(counter);
 
         // When the time is up.
         } else {
-            // Invalidate the participant.
-            invalidateParticipant();
+            // Hide the timer.
+            setRenderTimer(false);
+
+            // Invalidate the participant (i.e., which redirects to the welcome page).
+            invalidateParticipant("memory");
         }
-    }, [counter, invalidateParticipant]);
+    }, [renderTimer, timer, invalidateParticipant]);
 
     // If the page is loading.
     if (loading) {
@@ -70,10 +101,13 @@ const Stop: React.FC = () => {
                 {/* The page data. */}
                 <PageContent {...data} />
 
-                {/* Redirect information. */}
-                <p className="mx-auto mt-10 max-w-xl text-center font-light text-sm text-boterview-text border-0">
-                    You will soon be redirected to the welcome page ({ counter }).
-                </p>
+                {/* Timer information. */}
+                {renderTimer && (
+                    <p className="mx-auto mt-10 max-w-xl text-center font-light text-sm text-boterview-text border-0">
+                        You will soon be redirected to the welcome page ({ timer }).
+                    </p>
+                )}
+
             </Box>
         );
     }
