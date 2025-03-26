@@ -5,6 +5,7 @@ import textwrap
 import os
 import secrets
 import string
+import importlib.metadata
 
 
 # Parse the contents of a file.
@@ -186,3 +187,18 @@ def is_dictionary(expected_type: Type[Any]) -> bool:
 
     # Otherwise, return `False`.
     return False
+
+
+# Get the package version from the `pyproject.toml` file.
+def get_package_logo() -> str:
+    # Import the logo from the context.
+    from boterview.context.content import LOGO
+
+    # Get the version dynamically.
+    __version__ = importlib.metadata.version("boterview")
+
+    # Replace `{{version}}` with the actual version.
+    LOGO = LOGO.replace("{{version}}", __version__)
+
+    # Return the logo.
+    return LOGO
