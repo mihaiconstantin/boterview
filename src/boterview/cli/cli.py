@@ -2,6 +2,9 @@
 import click
 import sys
 
+# Helpers.
+from boterview.helpers import utils
+
 # Import the commands.
 from boterview.cli.commands.preview import preview
 from boterview.cli.commands.run import run
@@ -12,9 +15,13 @@ from boterview.cli.commands.parse import parse
 # Disable traceback.
 sys.tracebacklimit = 0
 
+# Get the package version message.
+message: str = utils.get_package_logo()
+
 
 # Main CLI group for the application commands.
 @click.group()
+@click.version_option(package_name = "boterview", message = message)
 def cli():
     """`boterview` commands for managing your study."""
     pass
