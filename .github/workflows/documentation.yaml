@@ -45,6 +45,7 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
+          cache-dependency-path: docs/pnpm-lock.yaml
 
       # Setup GitHub Pages.
       - name: Setup GitHub Pages
@@ -52,10 +53,12 @@ jobs:
 
       # Install `Node.js` modules.
       - name: Install documentation dependencies
+        working-directory: ./docs
         run: pnpm install
 
       # Build the documentation.
       - name: Build the documentation
+        working-directory: ./docs
         run: pnpm docs:build
 
       # Upload the built documentation as an artifact.
