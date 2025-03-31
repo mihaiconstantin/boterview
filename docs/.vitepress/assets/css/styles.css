@@ -1,0 +1,81 @@
+/* Imports. */
+@import "tailwindcss";
+
+/* Import custom fonts. */
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+/* Trigger the dark mode via `dark` class on `html` element. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+/* Tailwind color variables. */
+@theme {
+    /* Custom colors. */
+    --color-boterview-text: #393f4a;
+    --color-boterview-gray: #dcd2cc;
+    --color-boterview-background-dark: #212121;
+    --color-boterview-text-dark: #ededed;
+
+    /* `boterview` color variations. */
+    --color-boterview-50: #fbf2ee;
+    --color-boterview-100: #f7e5de;
+    --color-boterview-200: #f0cbbd;
+    --color-boterview-300: #e8b19b;
+    --color-boterview-400: #e0977a;
+    --color-boterview-500: #d97d5a;
+    --color-boterview-550: #d06b44;
+    --color-boterview-600: #c7592e;
+    --color-boterview-700: #954322;
+    --color-boterview-800: #642d17;
+    --color-boterview-900: #32160b;
+    --color-boterview-950: #190b06;
+
+    /* Custom fonts. */
+    --font-boterview: "Comic Neue", sans-serif;
+}
+
+
+/* `VitePress` styles overrides. */
+:root {
+    #VPContent {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .VPHome {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        margin-bottom: 0 !important;
+    }
+
+    .VPFeatures {
+        flex-grow: 1;
+    }
+
+    .VPNavBarTitle {
+        .VPImage {
+            @apply shadow rounded-[0.3rem];
+        }
+
+        span {
+            @apply font-boterview text-[1.1rem] tracking-[0.2px];
+            @apply from-boterview-500 dark:from-boterview-400 bg-gradient-to-r from-[15px] to-[var(--vp-c-text-1)] to-[35px] bg-clip-text text-transparent;
+        }
+    }
+}
+
+
+/* `VitePress` variables overrides for light mode. */
+html:not(.dark) {
+    --vp-c-brand-1: var(--color-boterview-600);
+    --vp-c-brand-2: var(--color-boterview-550);
+}
+
+
+/* `VitePress` variables overrides for dark mode. */
+html.dark {
+    --vp-c-brand-1: var(--color-boterview-400);
+    --vp-c-brand-2: var(--color-boterview-500);
+}
