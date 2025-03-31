@@ -1,3 +1,18 @@
+<!-- Script. -->
+<script setup>
+// Imports.
+import { useRouter } from "vitepress";
+
+// Get the router instance.
+const router = useRouter();
+
+// Define the navigation function.
+const getStarted = () => {
+    // Navigate.
+    router.go("/guide/what-is-boterview");
+};
+</script>
+
 <!-- Template. -->
 <template>
     <div
@@ -43,6 +58,8 @@
                     <div class="mt-6 border-0">
                         <button
                             class="!bg-boterview-500 hover:!bg-boterview-600 active:!bg-boterview-700 rounded-3xl !px-5 !py-2 text-sm font-[600] !text-[var(--vp-button-brand-text)] transition-colors duration-250"
+                            type="button"
+                            @click="getStarted"
                         >
                             Get Started
                         </button>
@@ -67,10 +84,3 @@
         </div>
     </div>
 </template>
-
-<!-- Script. -->
-<script>
-export default {
-    name: "Hero"
-};
-</script>
