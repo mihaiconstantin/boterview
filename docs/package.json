@@ -1,0 +1,20 @@
+{
+    "name": "boterview-documentation",
+    "private": true,
+    "version": "1.0.0",
+    "scripts": {
+        "docs:dev": "vitepress dev",
+        "docs:build": "vitepress build",
+        "docs:preview": "vitepress preview",
+        "format": "prettier --write ."
+    },
+    "devDependencies": {
+        "@tailwindcss/postcss": "^4.0.17",
+        "autoprefixer": "^10.4.21",
+        "postcss": "^8.5.3",
+        "prettier": "^3.5.3",
+        "prettier-plugin-tailwindcss": "^0.6.11",
+        "tailwindcss": "^4.0.17",
+        "vitepress": "^1.6.3"
+    }
+}
