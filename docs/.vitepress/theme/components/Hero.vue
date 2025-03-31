@@ -26,7 +26,7 @@ const getStarted = () => {
             >
                 <!-- Hero title and description. -->
                 <div
-                    class="flex flex-col items-center border-0 text-center min-[960px]:w-[570px] min-[960px]:items-start min-[960px]:text-left"
+                    class="flex w-full flex-col items-center border-0 text-center min-[960px]:w-[570px] min-[960px]:items-start min-[960px]:text-left"
                 >
                     <!-- Title. -->
                     <h1
@@ -37,14 +37,14 @@ const getStarted = () => {
 
                     <!-- Text. -->
                     <div
-                        class="mb-3 border-0 text-3xl leading-10 font-light max-[960px]:w-[500px] min-[460px]:w-[400px] min-[960px]:w-full min-[960px]:text-5xl min-[960px]:leading-14"
+                        class="mb-3 w-full border-0 text-3xl leading-10 font-light min-[460px]:max-[768px]:w-[400px] min-[768px]:max-[960px]:w-[500px] min-[960px]:text-5xl min-[960px]:leading-14"
                     >
                         Large Language Model Interview Toolkit
                     </div>
 
                     <!-- Tagline. -->
                     <div
-                        class="border-0 text-lg leading-8 font-light text-[var(--vp-c-text-2)] max-[960px]:w-[500px] min-[460px]:w-[400px] min-[960px]:w-full min-[960px]:text-2xl min-[960px]:leading-9"
+                        class="w-full border-0 text-lg leading-8 font-light text-[var(--vp-c-text-2)] min-[460px]:max-[768px]:w-[400px] min-[768px]:max-[960px]:w-[500px] min-[960px]:text-2xl min-[960px]:leading-9"
                     >
                         The premise is simple—from
                         <span
