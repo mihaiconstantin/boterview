@@ -1,3 +1,10 @@
+<!-- Script. -->
+<script>
+    export default {
+        name: "Footer"
+    };
+</script>
+
 <!-- Template. -->
 <template>
     <footer
@@ -56,10 +63,3 @@
         </div>
     </footer>
 </template>
-
-<!-- Script. -->
-<script>
-export default {
-    name: "Footer"
-};
-</script>
