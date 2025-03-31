@@ -21,7 +21,7 @@ features:
           any time as a <code>markdown</code> document.
           <a
               href="/guide/what-is-boterview"
-              class="font-semibold !text-boterview-550 hover:!text-boterview-500 dark:!text-boterview-400 dark:hover:!text-boterview-500"
+              class="text-nowrap font-semibold !text-boterview-550 hover:!text-boterview-500 dark:!text-boterview-400 dark:hover:!text-boterview-500"
           >
               Get Started
           </a>
