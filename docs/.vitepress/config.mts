@@ -71,8 +71,7 @@ export default defineConfig({
             { text: "Reference", link: "/reference/study-config" },
         ],
         editLink: {
-            pattern:
-                "https://github.com/mihaiconstantin/boterview/edit/main/docs/:path",
+            pattern: "https://github.com/mihaiconstantin/boterview/edit/main/docs/content/:path",
             text: "Edit this page on GitHub",
         }
     }
