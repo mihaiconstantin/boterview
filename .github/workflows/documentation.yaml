@@ -1,0 +1,83 @@
+# Workflow name.
+name: Deploy `boterview` documentation to GitHub Pages
+
+# Triggers.
+on:
+  # On push.
+  push:
+    branches: [main]
+
+  # On manual dispatch.
+  workflow_dispatch:
+
+# Sets permissions.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, and keep running jobs.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+# Define the jobs.
+jobs:
+  # The build job.
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository.
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Setup `pnpm`.
+      - name: Setup `pnpm`
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      # Setup `Node.js`.
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      # Setup GitHub Pages.
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v4
+
+      # Install `Node.js` modules.
+      - name: Install documentation dependencies
+        run: pnpm install
+
+      # Build the documentation.
+      - name: Build the documentation
+        run: pnpm docs:build
+
+      # Upload the built documentation as an artifact.
+      - name: Upload build artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/.vitepress/dist
+
+  # The deployment job.
+  deploy:
+    # The environment.
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+
+    # Name.
+    name: Deploy the documentation
+
+    # The steps.
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
