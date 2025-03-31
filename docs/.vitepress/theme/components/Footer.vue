@@ -17,7 +17,7 @@
             >
             by
             <a
-                class="!text-[var(--vp-c-brand-1)]"
+                class="!text-[#3451b2] dark:!text-[#a8b1ff]"
                 href="https://mihaiconstantin.com"
                 target="_blank"
             >
