@@ -33,7 +33,7 @@
                     >
                         The premise is simple—from
                         <span
-                            class="text-boterview-500 dark:text-boterview-400 italic"
+                            class="text-boterview-550 dark:text-boterview-400 italic"
                             >your</span
                         >
                         interview protocol to data generation in moments.
