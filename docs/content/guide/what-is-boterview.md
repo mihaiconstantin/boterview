@@ -111,8 +111,7 @@ boterview preview --config study.toml --condition "Condition 1"
 boterview run --config study.toml --database boterview.db
 ```
 
-At this point, you can access the study at
-[http://localhost:8080](http://localhost:8080).
+At this point, you can access the study at `http://localhost:8080`.
 
 Suppose several participants have went through the study and you want to
 download the data. You can do so by navigating to the `/download` endpoint. The
