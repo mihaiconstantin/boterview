@@ -36,11 +36,8 @@
 }
 
 
-/* `VitePress` overrides. */
+/* `VitePress` styles overrides. */
 :root {
-    /* Variables. */
-    /* --vp-c-brand-1: #d97d5a; */
-
     #VPContent {
         display: flex;
         flex-direction: column;
@@ -67,4 +64,18 @@
             @apply from-boterview-500 dark:from-boterview-400 bg-gradient-to-r from-[15px] to-[var(--vp-c-text-1)] to-[35px] bg-clip-text text-transparent;
         }
     }
+}
+
+
+/* `VitePress` variables overrides for light mode. */
+html:not(.dark) {
+    --vp-c-brand-1: var(--color-boterview-600);
+    --vp-c-brand-2: var(--color-boterview-550);
+}
+
+
+/* `VitePress` variables overrides for dark mode. */
+html.dark {
+    --vp-c-brand-1: var(--color-boterview-400);
+    --vp-c-brand-2: var(--color-boterview-500);
 }
