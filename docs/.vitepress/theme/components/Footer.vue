@@ -25,9 +25,33 @@
             </a>
         </div>
 
-        <div class="!text-decoration-none">
-            <a href="https://opensource.org/license/mit/" target="_blank">
-                MIT licensed
+        <div class="license-mit !no-underline">
+            Software released under the
+            <a href="https://opensource.org/license/mit" target="_blank">
+                MIT license
+            </a>
+        </div>
+
+        <div
+            class="license-cc !no-underline"
+            xmlns:cc="https://creativecommons.org/ns#"
+            xmlns:dct="https://purl.org/dc/terms/"
+        >
+            All other
+            <a
+                property="dct:title"
+                rel="cc:attributionURL"
+                href="https://boterview.dev"
+            >
+                website content
+            </a>
+            is
+            <a
+                href="https://creativecommons.org/licenses/by/4.0/"
+                target="_blank"
+                rel="license noopener noreferrer"
+            >
+                CC BY 4.0 licensed
             </a>
         </div>
     </footer>
