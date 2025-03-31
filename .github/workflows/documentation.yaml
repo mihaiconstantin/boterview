@@ -1,5 +1,5 @@
 # Workflow name.
-name: Deploy `boterview` documentation to GitHub Pages
+name: Deploy documentation
 
 # Triggers.
 on:
