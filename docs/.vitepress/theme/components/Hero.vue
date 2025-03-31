@@ -71,7 +71,7 @@ const getStarted = () => {
                     class="logo relative w-[210px] -rotate-3 border-0 min-[960px]:w-[250px]"
                 >
                     <div
-                        class="logo-background absolute inset-10 -z-10 border-1 bg-[linear-gradient(-45deg,var(--color-boterview-200)_10%,var(--color-boterview-400)_10%)] blur-[45px] dark:inset-8 dark:blur-[70px]"
+                        class="logo-background absolute inset-10 -z-10 border-0 bg-[linear-gradient(-45deg,var(--color-boterview-200)_10%,var(--color-boterview-400)_10%)] blur-[45px] dark:inset-8 dark:blur-[70px]"
                     ></div>
                     <img
                         class="mx-auto w-[320px] max-w-[320px] rounded-[2rem] shadow-2xl select-none dark:shadow-xl"
