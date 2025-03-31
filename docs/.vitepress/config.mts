@@ -5,6 +5,11 @@ import { defineConfig, type DefaultTheme } from "vitepress";
 // Define the website description string.
 const description = "boterview is a Large Language Model Interview Toolkit. The premise is simple—from your interview protocol to data generation in moments.";
 
+// Define the open graph content.
+const ogDescription = "Effortlessly deploy LLM powered interviews.";
+const ogTitle = "Interview Toolkit";
+const ogImage = "https://boterview.dev/images/boterview-og-light.png";
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
     // Site configuration.
@@ -37,14 +42,20 @@ export default defineConfig({
 
         // Social media links.
         ["meta", { property: "og:site_name", content: "boterview" }],
-        ["meta", { property: "og:description", content: description }],
-        ["meta", { property: "og:image", content: "/images/boterview-og-light.png" }],
+        ["meta", { property: "og:title", content: ogTitle }],
+        ["meta", { property: "og:description", content: ogDescription }],
+        ["meta", { property: "og:image", content: ogImage }],
         ["meta", { property: "og:url", content: "https://boterview.dev" }],
         ["meta", { property: "og:type", content: "website" }],
+        ["meta", { property: "og:image:type", content: "image/png" }],
+        ["meta", { property: "og:image:width", content: "1200" }],
+        ["meta", { property: "og:image:height", content: "630" }],
+        ["meta", { property: "og:locale", content: "en_US" }],
         ["meta", { name: "twitter:card", content: "summary_large_image" }],
-        ["meta", { name: "twitter:title", content: "boterview" }],
-        ["meta", { name: "twitter:description", content: description }],
-        ["meta", { name: "twitter:image", content: "/images/boterview-og-light.png" }],
+        ["meta", { name: "twitter:site", content: "@MihaiAC" }],
+        ["meta", { name: "twitter:title", content: ogTitle }],
+        ["meta", { name: "twitter:description", content: ogDescription }],
+        ["meta", { name: "twitter:image", content: ogImage }]
     ],
 
     // Theme configuration.

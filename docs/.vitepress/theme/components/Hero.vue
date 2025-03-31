@@ -1,16 +1,16 @@
 <!-- Script. -->
 <script setup>
-// Imports.
-import { useRouter } from "vitepress";
+    // Imports.
+    import { useRouter } from "vitepress";
 
-// Get the router instance.
-const router = useRouter();
+    // Get the router instance.
+    const router = useRouter();
 
-// Define the navigation function.
-const getStarted = () => {
-    // Navigate.
-    router.go("/guide/what-is-boterview");
-};
+    // Define the navigation function.
+    const getStarted = () => {
+        // Navigate.
+        router.go("/guide/what-is-boterview");
+    };
 </script>
 
 <!-- Template. -->

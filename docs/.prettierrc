@@ -1,9 +1,8 @@
 {
-    "plugins": [
-        "prettier-plugin-tailwindcss"
-    ],
+    "plugins": ["prettier-plugin-tailwindcss"],
     "tabWidth": 4,
     "trailingComma": "none",
     "singleQuote": false,
+    "vueIndentScriptAndStyle": true,
     "semi": true
 }

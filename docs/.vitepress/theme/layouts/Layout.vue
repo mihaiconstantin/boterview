@@ -1,12 +1,12 @@
 <!-- Script. -->
 <script setup>
-//  Imports.
-import DefaultTheme from "vitepress/theme";
-import Hero from "../components/Hero.vue";
-import Footer from "../components/Footer.vue";
+    //  Imports.
+    import DefaultTheme from "vitepress/theme";
+    import Hero from "../components/Hero.vue";
+    import Footer from "../components/Footer.vue";
 
-// Extract the custom layout.
-const { Layout } = DefaultTheme;
+    // Extract the custom layout.
+    const { Layout } = DefaultTheme;
 </script>
 
 <!-- Template. -->
