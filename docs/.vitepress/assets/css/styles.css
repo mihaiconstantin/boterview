@@ -58,7 +58,12 @@
 
     .VPNavBarTitle {
         .VPImage {
-            border-radius: 0.28rem;
+            @apply shadow rounded-[0.3rem];
+        }
+
+        span {
+            @apply font-boterview text-[1.1rem] tracking-[0.2px];
+            @apply from-boterview-500 dark:from-boterview-400 bg-gradient-to-r from-[15px] to-[var(--vp-c-text-1)] to-[35px] bg-clip-text text-transparent;
         }
     }
 }
