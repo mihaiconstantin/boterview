@@ -64,15 +64,15 @@ requires-python = ">=3.10"
 # Package dependencies.
 dependencies = [
   "click",
-  "uvicorn",
-  "fastapi",
-  "peewee",
-  "pydantic",
-  "python-dotenv",
-  "tomli",
-  "pyjwt",
-  "openai",
-  "chainlit"
+    "uvicorn",
+    "fastapi",
+    "peewee",
+    "pydantic",
+    "python-dotenv",
+    "tomli",
+    "pyjwt",
+    "openai",
+    "chainlit == 2.4.400"
 ]
 
 # The package `boterview` command-line interface.
