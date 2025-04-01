@@ -13,6 +13,11 @@
     display: none !important;
 }
 
+/* Hide user navigation button. */
+#user-nav-button {
+    display: none !important;
+}
+
 /* Hide the user profile button. */
 #radix-\:r9\:{
     display: none !important;
