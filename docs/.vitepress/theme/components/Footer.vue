@@ -9,7 +9,7 @@
 <template>
     <footer
         id="footer"
-        class="relative mt-16 mb-1 flex w-full flex-col items-center justify-center gap-[0.3rem] border-0 p-4 pt-6 text-center text-sm font-normal"
+        class="relative mt-16 mb-1 flex w-full flex-col items-center justify-center gap-[0.1rem] border-0 p-4 pt-6 text-center text-[0.8rem] font-normal"
     >
         <!-- Add a div containing a border top. -->
         <div
