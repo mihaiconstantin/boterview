@@ -51,7 +51,7 @@ async def ui(key: str, request: Request) -> JSONResponse:
         )
 
     # Overwise, prepare the response data.
-    data: Dict[str, str | List[str] | Dict[str, str] | None] = {
+    data: Dict[str, str | Dict[str, str] | None] = {
         "heading": ui.elements[key].heading,
         "content": ui.elements[key].content,
         "metadata": ui.elements[key].metadata
