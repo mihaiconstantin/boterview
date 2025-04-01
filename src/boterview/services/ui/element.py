@@ -8,7 +8,7 @@ class Element(Protocol):
     heading: str | None
 
     # Element content.
-    content: str | List[str]
+    content: str
 
     # Metadata.
     metadata: Dict[str, Any]
@@ -18,5 +18,5 @@ class Element(Protocol):
         ...
 
     # Parse markdown content.
-    def parse_markdown(self: "Element", file: str) -> List[str]:
+    def parse_markdown(self: "Element", file: str) -> str:
         ...
