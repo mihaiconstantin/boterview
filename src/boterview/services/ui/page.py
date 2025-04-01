@@ -12,7 +12,7 @@ class Page(Element):
     heading: str | None
 
     # Page content.
-    content: str | List[str]
+    content: str
 
     # Metadata.
     metadata: Dict[str, Any] = {}
@@ -26,18 +26,12 @@ class Page(Element):
         return contents.strip()
 
     # Parse markdown content.
-    def parse_markdown(self: "Page", file: str) -> List[str]:
+    def parse_markdown(self: "Page", file: str) -> str:
         # Read the file contents.
         contents: str = utils.read_contents(file)
 
-        # Set the chunks.
-        chunks: List[str] = contents.split("\n\n")
-
-        # Trim the chunks.
-        chunks = [chunk.strip() for chunk in chunks]
-
         # Return the chunks.
-        return chunks
+        return contents.strip()
 
     # Initialize the `Page` object.
     def __init__(self: "Page", heading: str, file: str, metadata: Dict[str, Any]) -> None:
