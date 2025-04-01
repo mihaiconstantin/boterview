@@ -89,7 +89,6 @@ to your study. It contains three main subcommands:
 - `secret`: Used to generate a random secret required to run the study.
 - `study`: Used to scaffold an example study setup.
 
-
 ## Data Parsing
 
 The `boterview parse` command can be used to parse the study database. It is
@@ -146,7 +145,7 @@ boterview parse --config study.toml --database boterview.db
 examples. For the time being, the instructions above should suffice to get you
 started with `boterview`. We also recommend reading the comments in the study
 configuration file, as well as the application interface default content. See
-the *Contributing* section below for more information on how you can help.
+the _Contributing_ section below for more information on how you can help.
 
 ## Contributing
 
@@ -159,4 +158,4 @@ the *Contributing* section below for more information on how you can help.
 
 - The package source code in this repository is licensed under the [MIT
   license](https://opensource.org/license/mit).
-- <p class="license-cc" xmlns:cc="https://creativecommons.org/ns#" xmlns:dct="https://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://boterview.dev">The documentation and other website materials</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://mihaiconstantin.com">Mihai Constantin</a> are licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0</a>.</p>
+- <p class="license-cc" xmlns:cc="https://creativecommons.org/ns" xmlns:dct="https://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://boterview.dev">The documentation and other website materials</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://mihaiconstantin.com">Mihai Constantin</a> are licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0</a>.</p>
