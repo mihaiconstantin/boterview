@@ -1,10 +1,11 @@
 // Imports.
 import React from "react";
 import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import useInjectTermination from "../hooks/useInjectTermination";
 import sanitizeHtml from "../helpers/sanitizeHtml";
 import UIContent from "../types/UIContent";
-
 
 // `PageContent` component.
 const PageContent: React.FC<UIContent> = ({ heading, content, metadata }) => {
@@ -16,7 +17,7 @@ const PageContent: React.FC<UIContent> = ({ heading, content, metadata }) => {
         <div className="page-content text-boterview-text border-0">
             {/* Heading. */}
             <h2 className="mx-auto text-center text-4xl font-light tracking-tight border-0">
-                { heading }
+                {heading}
             </h2>
 
             {/* Route content. */}
@@ -26,25 +27,30 @@ const PageContent: React.FC<UIContent> = ({ heading, content, metadata }) => {
                     // Render the `HTML`.
                     <div
                         className="flex flex-col gap-6 mx-auto mt-10 max-w-2xl font-light border-0"
-                        dangerouslySetInnerHTML={{ __html: injectTermination(sanitizeHtml(content as string)) }}
+                        dangerouslySetInnerHTML={{
+                            __html: injectTermination(
+                                sanitizeHtml(content as string)
+                            )
+                        }}
                     />
-                // Otherwise.
                 ) : (
-                    <div className="flex flex-col gap-6 mx-auto mt-10 max-w-2xl font-light border-0">
+                    // Otherwise.
+                    <div className="prose mt-10 font-light mx-auto max-w-2xl border-0">
                         {
-                            // For each string in the content array.
-                            (content as string[]).map((paragraph, index) => (
-                                // Render a paragraph.
-                                <Markdown key={index}>
-                                    {injectTermination(paragraph)}
-                                </Markdown>
-                            ))
+                            // Render the `markdown` content.
+                            <Markdown
+                                remarkPlugins={[remarkGfm]}
+                                rehypePlugins={[rehypeRaw]}
+                            >
+                                {/* Inject the termination phrase if present. */}
+                                {injectTermination(content)}
+                            </Markdown>
                         }
                     </div>
                 )
             }
         </div>
     );
-}
+};
 
 export default PageContent;
