@@ -19,7 +19,7 @@
 }
 
 /* Hide the user profile button. */
-#radix-\:r9\:{
+#radix-\:r9\: {
     display: none !important;
 }
 
@@ -35,7 +35,7 @@ button:has(svg.lucide-copy) {
 
 /* Hide the LLM answer copy button. */
 button:has(svg.lucide-power) {
-    background-color: #D97D5A;
+    background-color: #d97d5a;
     color: white;
 
     &:hover {
