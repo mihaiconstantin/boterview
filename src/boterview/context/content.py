@@ -208,7 +208,7 @@ CONTENT: Dict[str, Dict[str, str] | Dict[str, Dict[str, str]]] = {
 
             If you are comfortable with coding, you can use raw `HTML` combined
             with Tailwind `CSS` classes to style the content. Otherwise, the
-            content will be rendered as as `markdown` (i.e., with any potential
+            content will be rendered as `markdown` (i.e., with any potential
             `markdown` _formatting applied_). If you opt for `HTML`, be sure to
             set the `html` value to `True` for this page in the **configuration
             file**. This requirement applies to other interface elements as well
