@@ -1,5 +1,21 @@
 # Changelog
 
+## boterview 1.3.0
+
+### Added
+- Add `--version` option to `boterview` CLI command to display the current
+  version of the package.
+- Add `documentation.yaml` GitHub workflow file for deploying the `boterview`
+  documentation to `GitHub Pages` on push to the `main` branch.
+- Add preliminary documentation via `VitePress`. The documentation setup is
+  complete, only the content needs working on.
+
+### Changed
+- Changed markdown parsing for the UI pages content to rely on `remark-gfm` for
+  better support of GitHub Flavored Markdown (GFM) features (e.g., tables, task
+  or lists). Now, it is also possible to combine `markdown` and `HTML` in the UI
+  content.
+
 ## boterview 1.2.0
 
 ### Added
