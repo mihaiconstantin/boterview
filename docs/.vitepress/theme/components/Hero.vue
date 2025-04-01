@@ -55,7 +55,7 @@
                     </div>
 
                     <!-- Action button. -->
-                    <div class="mt-6 border-0">
+                    <div class="mt-6 border-0 select-none">
                         <button
                             class="!bg-boterview-500 hover:!bg-boterview-600 active:!bg-boterview-700 rounded-3xl !px-5 !py-2 text-sm font-[600] !text-[var(--vp-button-brand-text)] transition-colors duration-250"
                             type="button"
