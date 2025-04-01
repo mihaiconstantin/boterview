@@ -19,7 +19,7 @@
         <div>
             Made with
             <span
-                class="heart inline-block cursor-default text-[1.15rem] text-[#c41b1b] transition-all duration-500 hover:rotate-[360deg] dark:text-[#c56c6c]"
+                class="heart inline-block cursor-default text-[1.15rem] text-[#c41b1b] transition-all duration-500 active:rotate-[360deg] hover:rotate-[360deg] dark:text-[#c56c6c]"
                 >&#9829;</span
             >
             by
