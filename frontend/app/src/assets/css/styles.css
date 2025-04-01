@@ -1,5 +1,8 @@
-/* Import Tailwind. */
+/* Imports. */
 @import "tailwindcss";
+
+/* `Tailwind` plugins. */
+@plugin "@tailwindcss/typography";
 
 
 /* Custom colors. */
