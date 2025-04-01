@@ -1,5 +1,8 @@
 // Imports.
 import React from "react";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import sanitizeHtml from "../helpers/sanitizeHtml";
 import useFetchContent from "../hooks/useFetchContent";
 
@@ -33,11 +36,14 @@ const Footer: React.FC = () => {
                             // Render the paragraphs.
                             <div className="authors flex flex-col gap-2 border-0">
                                 {
-                                    // For each string in the content array.
-                                    (data.content as string[]).map((paragraph, index) => (
-                                        // Render a div.
-                                        <div key={index}>{paragraph}</div>
-                                    ))
+                                    // Render the markdown content
+                                    <Markdown
+                                        remarkPlugins={[remarkGfm]}
+                                        rehypePlugins={[rehypeRaw]}
+                                    >
+                                        {/* The raw content. */}
+                                        {data.content}
+                                    </Markdown>
                                 }
                             </div>
                         )
