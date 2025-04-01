@@ -6,10 +6,25 @@
 
 
 /* Custom colors. */
-@theme {
+@theme static {
+    /* Custom colors. */
     --color-boterview-text: #393F4A;
     --color-boterview-orange: #D97D5A;
     --color-boterview-gray: #DCD2CC;
     --color-boterview-background-dark: #212121;
     --color-boterview-text-dark: #EDEDED;
+
+    /* `boterview` color variations. */
+    --color-boterview-50: #fbf2ee;
+    --color-boterview-100: #f7e5de;
+    --color-boterview-200: #f0cbbd;
+    --color-boterview-300: #e8b19b;
+    --color-boterview-400: #e0977a;
+    --color-boterview-500: #d97d5a;
+    --color-boterview-550: #d06b44;
+    --color-boterview-600: #c7592e;
+    --color-boterview-700: #954322;
+    --color-boterview-800: #642d17;
+    --color-boterview-900: #32160b;
+    --color-boterview-950: #190b06;
 }

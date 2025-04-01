@@ -7,6 +7,7 @@ import useInjectTermination from "../hooks/useInjectTermination";
 import sanitizeHtml from "../helpers/sanitizeHtml";
 import UIContent from "../types/UIContent";
 
+
 // `PageContent` component.
 const PageContent: React.FC<UIContent> = ({ heading, content, metadata }) => {
     // Get the termination injection function.
@@ -17,7 +18,7 @@ const PageContent: React.FC<UIContent> = ({ heading, content, metadata }) => {
         <div className="page-content text-boterview-text border-0">
             {/* Heading. */}
             <h2 className="mx-auto text-center text-4xl font-light tracking-tight border-0">
-                {heading}
+                { heading }
             </h2>
 
             {/* Route content. */}
@@ -43,7 +44,7 @@ const PageContent: React.FC<UIContent> = ({ heading, content, metadata }) => {
                                 rehypePlugins={[rehypeRaw]}
                             >
                                 {/* Inject the termination phrase if present. */}
-                                {injectTermination(content)}
+                                { injectTermination(content) }
                             </Markdown>
                         }
                     </div>

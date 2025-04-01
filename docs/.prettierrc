@@ -4,5 +4,6 @@
     "trailingComma": "none",
     "singleQuote": false,
     "vueIndentScriptAndStyle": true,
-    "semi": true
+    "semi": true,
+    "bracketSpacing": true
 }

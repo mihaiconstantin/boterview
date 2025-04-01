@@ -21,7 +21,7 @@ const Box: React.FC<BoxProps> = ({ children }) => {
                     <svg viewBox="0 0 1024 1024" className="absolute top-1/3 left-1/2 -z-10 size-[84rem] -translate-x-1/2" aria-hidden="true">
                         <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fillOpacity="0.7" />
                         <defs>
-                            <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(512 512) rotate(90) scale(512)">
+                            <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(512 512) rotate(90) scale(300)">
                                 <stop stopColor="#DCD2CC" />
                                 <stop offset="1" stopColor="#D97D5A" stopOpacity="0" />
                             </radialGradient>

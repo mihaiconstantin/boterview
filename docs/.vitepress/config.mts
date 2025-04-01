@@ -67,8 +67,7 @@ export default defineConfig({
             { icon: "github", link: "https://github.com/mihaiconstantin/boterview" }
         ],
         nav: [
-            { text: "Guide", link: "/guide/what-is-boterview" },
-            { text: "Reference", link: "/reference/study-config" },
+            { text: "Guide", link: "/guide/what-is-boterview" }
         ],
         editLink: {
             pattern: "https://github.com/mihaiconstantin/boterview/edit/main/docs/content/:path",
