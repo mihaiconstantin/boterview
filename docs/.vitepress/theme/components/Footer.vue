@@ -33,7 +33,10 @@
         </div>
 
         <div class="license-mit !no-underline">
-            Software released under the
+            <a href="https://github.com/mihaiconstantin/boterview" target="_blank">
+                Software 
+            </a>
+            released under the
             <a href="https://opensource.org/license/mit" target="_blank">
                 MIT license
             </a>
